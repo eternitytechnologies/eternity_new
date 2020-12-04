@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="res_partner_for_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.inherit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//page[1]//field[@name='child_ids']//form//field[@name='comment']"
+                       position="before">
+                    <field name="vat" attrs="{'invisible': [('type', '!=', 'invoice')]}" string="GSTIN"/>
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="options">{'no_create':True, 'no_edit':True, 'no_open':True}</attribute>
+                </xpath>
+                <!--<xpath expr="//field[@name='vat']" position="attributes">-->
+                <!--<attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>-->
+                <!--</xpath>-->
+                <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='street2']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>
+                </xpath>
+
+                <field name='ref' position='after'>
+                    <field name='supplier_rank'></field>
+                </field>
+
+                <field name="vat" position="after">
+                    <field name="pan"
+                           attrs="{'invisible': [('supplier_rank', '=', 0)], 'required': [('supplier_rank', '>', 1),('parent_id','=',False)]}"/>
+                    <field name="region_id" readonly="1"/>
+                </field>
+                <xpath expr="//notebook//page[1]//field[@name='child_ids']" position="attributes">
+                    <attribute name="context">{'default_parent_id': active_id, 'default_street': street,
+                        'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip':
+                        zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id,
+                        'default_type': 'contact'}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!--<record id="res_partner_account_view_inherit" model="ir.ui.view">-->
+        <!--<field name="name">res.partner.inherit.account.form</field>-->
+        <!--<field name="model">res.partner</field>-->
+        <!--<field name="inherit_id" ref="account.view_partner_property_form"/>-->
+        <!--<field name="arch" type="xml">-->
+
+        <!--<xpath expr="//field[@name='property_payment_term_id']" position="attributes">-->
+        <!--<attribute name="attrs">{'required': [('company_type', '=', 'company'),('customer_rank','>',1)]}</attribute>-->
+        <!--</xpath>-->
+        <!--<xpath expr="//field[@name='property_supplier_payment_term_id']" position="attributes">-->
+        <!--<attribute name="attrs">{'required': [('company_type', '=', 'company'),('supplier_rank','>',1)]}</attribute>-->
+        <!--</xpath>-->
+
+        <!--                <xpath expr="//field[@name='property_payment_term_id']" position="attributes">-->
+        <!--                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='property_supplier_payment_term_id']" position="attributes">-->
+        <!--                    <attribute name="attrs">{'required': [('company_type', '=', 'company')]}</attribute>-->
+        <!--                </xpath>-->
+        <!--</field>-->
+        <!--</record>-->
+
+
+    </data>
+</odoo>

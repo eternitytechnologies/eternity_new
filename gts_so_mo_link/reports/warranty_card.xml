@@ -1,0 +1,99 @@
+<odoo>
+    <template id="warrenty_view_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="production">
+                <div class="page">
+                    <div class="row mb16">
+                        <div class="col-15">
+                            <table class="table border-top-0 border-right-0 border-left-0 border-bottom-0">
+                                <tr>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <b>Customer</b>
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        :
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="60%">
+                                        <b>Maz Auto Lift Services</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <b>Battery Sr. No.</b>
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="5%">
+                                        :
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="60%">
+                                        <b>ET-09-TM-0639</b>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="40%">
+                                        <b>Battery Type</b>
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        :
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="60%">
+                                        <b>24 V 210AH</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <b>Cell Type</b>
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        :
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="60%">
+                                        <b>3 PzB-ET 195</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <b>Invoice Reference</b>
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="5%">
+                                        :
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="60%">
+                                        <b>ET/20-21/INV-471</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="40%">
+                                        <b>Warrenty Period</b>
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        :
+                                    </td>
+                                    <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="60%">
+                                        <b>30/09/2020 To 29/09/2020</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <p style="page-break-before:always;"></p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+            string="Warrenty Card (PDF)"
+            id="warrenty_card_report_id"
+            model="mrp.production"
+            name="gts_so_mo_link.warrenty_view_pdf"
+            file="gts_so_mo_link.warrenty_view_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Finished products - %s' % object.name"
+            paperformat="report_custom_layout.warrenty_custom_paperformat"/>
+
+
+</odoo>

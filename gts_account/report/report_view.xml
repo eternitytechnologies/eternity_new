@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <template id="report_invoice_document_with_payments_reference"-->
+<!--              inherit_id="account.report_invoice_document" primary="True">-->
+<!--        <xpath expr="//div[@name='customer_code']" position="after">-->
+<!--            <div class="col-auto mw-100 mb-2" name="reference">-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <!--<report-->
+            <!--id="action_report_account_invoice_eternity_rja"-->
+            <!--model="account.move"-->
+            <!--string="Invoice Eternity Tech"-->
+            <!--report_type="qweb-pdf"-->
+            <!--name="gts_account.report_account_invoice_eternity_rja"-->
+            <!--file="gts_account.report_account_invoice_eternity_rja"-->
+            <!--paperformat="report_custom_layout.paperformat_custom"-->
+        <!--/>-->
+
+    <report
+            id="action_report_account_invoice_without_hf"
+            model="account.move"
+            string="Invoices Without Header &amp; Footer"
+            report_type="qweb-pdf"
+            name="gts_account.report_invoice_without_hf"
+            file="gts_account.report_invoice_without_hf"
+        />
+
+</odoo>

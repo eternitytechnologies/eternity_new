@@ -1,0 +1,149 @@
+<odoo>
+
+    <!--<template id="warranty_card_invoice">-->
+        <!--<t t-call="web.basic_layout">-->
+            <!--<t t-foreach="docs" t-as="o">-->
+                <!--<t t-set="lot_values" t-value="o.get_move_lines()"/>-->
+                <!--<t t-if="lot_values">-->
+                    <!--<t t-foreach="lot_values" t-as="line">-->
+                        <!--<div class="page">-->
+                            <!--<div class="row mb16">-->
+                                <!--<div class="col-15">-->
+                                    <!--<table class="table border-top-0 border-right-0 border-left-0 border-bottom-0">-->
+                                        <!--<tr>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="40%">-->
+                                                <!--<b>Customer</b>-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="5%">-->
+                                                <!--:-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="60%">-->
+                                                <!--<b><span t-esc="o.partner_id.name"/></b>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="40%">-->
+                                                <!--<t t-if="line.product_id.product_type == 'battery'">-->
+                                                    <!--<b>Battery No.</b>-->
+                                                <!--</t>-->
+                                                <!--<t t-if="line.product_id.product_type == 'cell'">-->
+                                                    <!--<b>Cell No.</b>-->
+                                                <!--</t>-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="5%">-->
+                                                <!--:-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="60%">-->
+                                                <!--<b>-->
+                                                    <!--<span t-esc="line.product_id.name"/>-->
+                                                <!--</b>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="40%">-->
+                                                <!--<t t-if="line.product_id.product_type == 'battery'">-->
+                                                    <!--<b>Battery Capacity @ C5</b>-->
+                                                <!--</t>-->
+                                                <!--<t t-if="line.product_id.product_type == 'cell'">-->
+                                                    <!--<b>Cell Capacity @ C5</b>-->
+                                                <!--</t>-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="5%">-->
+                                                <!--:-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="60%">-->
+                                                <!--<b><span t-esc="int(line.product_id.volts)"/> V <span t-esc="int(line.product_id.ah)"/> AH </b>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<t t-if="line.product_id.product_type == 'battery'">-->
+                                            <!--<tr>-->
+                                                <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                    <!--width="40%">-->
+                                                    <!--<b>Cell Type</b>-->
+                                                <!--</td>-->
+                                                <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                    <!--width="5%">-->
+                                                    <!--:-->
+                                                <!--</td>-->
+                                                <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                    <!--width="60%">-->
+                                                    <!--<b><span t-esc="o.get_cell_type(line.move_id.created_production_id.id)"/></b>-->
+                                                <!--</td>-->
+                                            <!--</tr>-->
+                                        <!--</t>-->
+                                        <!--<tr>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="40%">-->
+                                                <!--<t t-if="line.product_id.product_type == 'battery'">-->
+                                                    <!--<b>Battery Sr. No.</b>-->
+                                                <!--</t>-->
+                                                <!--<t t-if="line.product_id.product_type == 'cell'">-->
+                                                    <!--<b>Cell Sr. No.</b>-->
+                                                <!--</t>-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="5%">-->
+                                                <!--:-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="60%">-->
+                                                <!--<b><t t-if="line.lot_id"><t t-esc="line.lot_id.name"/></t></b>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="40%">-->
+                                                <!--<b>Invoice Reference</b>-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="5%">-->
+                                                <!--:-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="60%">-->
+                                                <!--<b><span t-esc="o.name"/></b>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="40%">-->
+                                                <!--<b>Warranty Period</b>-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="5%">-->
+                                                <!--:-->
+                                            <!--</td>-->
+                                            <!--<td class="border-top-0 border-right-0 border-left-0 border-bottom-0"-->
+                                                <!--width="60%">-->
+                                                <!--<b><span t-esc="line.lot_id.start_date"/> To <span t-esc="line.lot_id.end_date"/></b>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<p style="page-break-before:always;"></p>-->
+                        <!--</div>-->
+                    <!--</t>-->
+                <!--</t>-->
+            <!--</t>-->
+        <!--</t>-->
+    <!--</template>-->
+
+    <!--<report string="Warranty Card (PDF)"-->
+            <!--id="warranty_card_report_invoice"-->
+            <!--model="account.move"-->
+            <!--name="gts_account.warranty_card_invoice"-->
+            <!--file="gts_account.warranty_card_invoice"-->
+            <!--report_type="qweb-pdf"-->
+            <!--paperformat="report_custom_layout.warrenty_custom_paperformat"/>-->
+
+</odoo>

@@ -1,0 +1,7 @@
+<odoo>
+
+    <record id="crm_lost_reasons" model="res.groups">
+        <field name="name">CRM Lost Reasons Access</field>
+    </record>
+
+</odoo>

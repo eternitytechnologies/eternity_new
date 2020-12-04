@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_create_access" model="res.groups">
+        <field name="name">Product Creation Access</field>
+    </record>
+
+    <record id="product_create_email" model="res.groups">
+        <field name="name">Product Creation Email</field>
+    </record>
+
+</odoo>

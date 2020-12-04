@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="quotation_approval" model="res.groups">
+        <field name="name">Quotation Approval Access</field>
+    </record>
+
+    <record id="invoice_creation_approval" model="res.groups">
+        <field name="name">Invoice Creation Approval</field>
+    </record>
+
+    <record id="gross_profit_access" model="res.groups">
+        <field name="name">Gross Profit Access</field>
+    </record>
+
+</odoo>

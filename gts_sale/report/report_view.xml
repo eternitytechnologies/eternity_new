@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+            id="action_report_saleorder_without_hf_jar"
+            model="sale.order"
+            string="Quotation / Order Without Header &amp; Footer"
+            report_type="qweb-pdf"
+            name="gts_sale.report_saleorder_without_hf_jar"
+            file="gts_sale.report_saleorder_without_hf_jar"
+        />
+
+</odoo>

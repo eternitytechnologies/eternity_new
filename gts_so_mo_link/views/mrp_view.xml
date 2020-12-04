@@ -1,0 +1,73 @@
+<odoo>
+
+    <record id="mrp_production_view_inherit_production" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.plan</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="partner_id"
+                       attrs="{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}"
+                       options="{'no_create':True, 'no_edit':True, 'no_open':False}"/>
+                <field name="client_order_ref"
+                       attrs="{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}"/>
+                <field name="delivery_date"
+                       attrs="{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}"/>
+            </xpath>
+            <xpath expr="//field[@name='finished_move_line_ids']//tree//field[@name='state']" position="after">
+                <field name="attach_production_report" filename="attach_production_report_name" widget="download"/>
+                <field name="attach_production_report_name" invisible="1"/>
+            </xpath>
+            <xpath expr="//sheet//div[@name='button_box']" position="inside">
+                <button name="action_view_lot_numbers" type="object" icon="fa-list"
+                        attrs="{'invisible': [('lot_numbers_count', '=', 0)]}">
+                    <field name="lot_numbers_count" widget="statinfo" string="Lot/Serial Number(s)"/>
+                </button>
+                <button name="action_view_test_certificate" type="object" icon="fa-list"
+                        attrs="{'invisible': [('test_certificate_count', '=', 0)]}">
+                    <field name="test_certificate_count" widget="statinfo" string="Test Certificate(s)"/>
+                </button>
+            </xpath>
+            <xpath expr="//notebook//page[2]" position="after">
+                <page name="test_certificate_list" string="Test Certificate" invisible="1">
+                    <field name="test_report_ids"/>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_planned_start']" position="attributes">
+                <attribute name="attrs">{'readonly': [ '|', '&amp;', ('routing_id', '=', False), ('state', 'in',
+                    ['process', 'to_close', 'done', 'cancel']), '&amp;', ('routing_id', '!=', False),
+                    ('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_planned_finished']" position="attributes">
+                <attribute name="attrs">{'readonly': [ '|', '&amp;', ('routing_id', '=', False), ('state', 'in',
+                    ['process', 'to_close', 'done', 'cancel']), ('routing_id', '!=', False) ], 'invisible': [
+                    ('routing_id', '!=', False), ('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="mrp_production_view_inherit_production_tree" model="ir.ui.view">
+        <field name="name">mrp.production.tree.inherit.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">create_date desc</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Wkhtmltopdf failed -->
+
+</odoo>

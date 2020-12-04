@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_picking_inherit_jar" inherit_id="stock.report_picking">
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">report_custom_layout.external_layout_account_invoice_jar</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="style">margin-left:5mm;margin-right:5mm;</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('page')]/div[2]" position="replace">
+            <div class="row">
+                <div class="col-6">
+                    <div t-if="o.move_ids_without_package and o.move_ids_without_package[0].partner_id and o.move_ids_without_package[0].partner_id.id != o.partner_id.id">
+                        <span><strong>Delivery Address:</strong></span>
+                        <div t-field="o.move_ids_without_package[0].partner_id.parent_id"/>
+                        <div t-field="o.move_ids_without_package[0].partner_id.name"/>
+                        <div t-field="o.move_ids_without_package[0].partner_id" t-options="{'widget': 'contact', 'fields': ['address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                    </div>
+                    <div t-if="o.picking_type_id.code != 'internal' and (not o.move_ids_without_package or not o.move_ids_without_package[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
+                        <span><strong>Warehouse Address:</strong></span>
+                        <div t-field="o.picking_type_id.warehouse_id.partner_id.parent_id"/>
+                        <div t-field="o.picking_type_id.warehouse_id.partner_id.name"/>
+                        <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{'widget': 'contact', 'fields': ['address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                    </div>
+                </div>
+                <div class="col-5 offset-1">
+                    <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                        <span><strong>Vendor Address:</strong></span>
+                    </div>
+                    <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
+                        <span><strong>Warehouse Address:</strong></span>
+                    </div>
+                    <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
+                        <span><strong>Customer Address:</strong></span>
+                    </div>
+                    <div t-if="o.partner_id" name="partner_header">
+                        <div t-field="o.partner_id.parent_id"/>
+                        <div t-field="o.partner_id.name"/>
+                        <div t-field="o.partner_id" t-options="{'widget': 'contact', 'fields': ['phone'], 'no_marker': True, 'phone_icons': True}"/>
+                        <p t-if="o.sudo().partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.sudo().partner_id.vat"/></p>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//table[@t-if='o.move_line_ids and o.move_ids_without_package']/thead/tr/th" position="before">
+            <th name="th_index" class="text-center" style="width: 8%">SR NO</th>
+        </xpath>
+        <xpath expr="//table[@t-if='o.move_line_ids and o.move_ids_without_package']/tbody/t" position="before">
+            <t t-set="cnt" t-value="0"/>
+        </xpath>
+        <xpath expr="//table[@t-if='o.move_line_ids and o.move_ids_without_package']/tbody/t/t/tr/td" position="before">
+            <td name="td_index" class="text-center">
+                <t t-set="cnt" t-value="cnt+1"/>
+                <span t-esc="cnt"/>
+            </td>
+        </xpath>
+
+        <!-- HSN Code -->
+        <xpath expr="//table[@t-if='o.move_line_ids and o.move_ids_without_package']/thead/tr/th[2]" position="after">
+            <th name="th_hsn_code" class="text-center" style="width: 15%">HSN Code</th>
+        </xpath>
+        <xpath expr="//table[@t-if='o.move_line_ids and o.move_ids_without_package']/tbody/t/t/tr/td[2]" position="replace">
+            <td>
+                <span t-field="ml.product_id.display_name"/><br/>
+                <span t-field="ml.product_id.description_picking"/>
+            </td>
+            <td name="td_hsn_code" class="text-center">
+                <span t-field="ml.product_id.l10n_in_hsn_code"/>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>

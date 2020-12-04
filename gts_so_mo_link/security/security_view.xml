@@ -1,0 +1,7 @@
+<odoo>
+
+    <record id="show_bom_structure" model="res.groups">
+        <field name="name">Show BOM Structure</field>
+    </record>
+
+</odoo>

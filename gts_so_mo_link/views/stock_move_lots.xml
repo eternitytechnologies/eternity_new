@@ -1,0 +1,38 @@
+<odoo>
+
+    <record id="stock_move_view_inherit_production" model="ir.ui.view">
+        <field name="name">stock.move.form.inherit.plan</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="mrp.view_stock_move_lots"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom_qty']" position="attributes">
+                <attribute name="attrs">{'readonly': [('parent.state', 'not in', ('draft','confirmed'))]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="unit_factor" attrs="{'readonly': [('parent.state', 'not in', ('draft','confirmed'))]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_raw_tree_view_inherit" model="ir.ui.view">
+        <field name="name">stock.move.tree.inherit.raw</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="mrp.view_stock_move_raw_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_factor']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <!--<attribute name="readonly">1</attribute>-->
+                <!--<attribute name="force_save">1</attribute>-->
+            </xpath>
+            <!--<xpath expr="//field[@name='product_id']" position="attributes">-->
+                <!--<attribute name="readonly">1</attribute>-->
+                <!--<attribute name="force_save">1</attribute>-->
+            <!--</xpath>-->
+            <!--<xpath expr="//field[@name='product_uom']" position="attributes">-->
+                <!--<attribute name="readonly">1</attribute>-->
+                <!--<attribute name="force_save">1</attribute>-->
+            <!--</xpath>-->
+        </field>
+    </record>
+
+</odoo>

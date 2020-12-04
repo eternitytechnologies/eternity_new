@@ -1,0 +1,97 @@
+<odoo>
+
+    <template id="mrp.label_production_view_pdf">
+        <t t-call="web.basic_layout">
+            <!--<div class="page">-->
+                <t t-foreach="docs" t-as="production">
+                    <t t-set="cell_type" t-value=""/>
+                    <t t-foreach="production.move_raw_ids" t-as="comp">
+                        <t t-if="comp.product_id.product_type=='cell' and comp.product_uom_qty > 0">
+                            <t t-set="cell_type" t-value="comp.product_id.name"/>
+                        </t>
+                    </t>
+                    <t t-foreach="production.finished_move_line_ids" t-as="move">
+                        <div class="page">
+                            <div class="row mb16">
+                                <div class="col-6">
+                                    <table class="table" style="border:1px solid;">
+                                        <tr>
+                                            <td style="border:1px solid;">
+                                                <b>Battery Number</b>
+                                                :
+                                                <span t-esc="production.product_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid;">
+                                                <b>Battery Capacity at C5</b>
+                                                :
+                                                <span t-esc="int(production.product_id.volts)"/>
+                                                V
+                                                <span t-esc="int(production.product_id.ah)"/>
+                                                AH
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid;">
+                                                <b>Battery Serial Number</b>
+                                                :
+                                                <span t-esc="move.lot_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table class="table" style="border:1px solid;">
+                                        <tr>
+                                            <td style="border:1px solid;">
+                                                <b>Cell Type</b>
+                                                :
+                                                <span t-esc="cell_type"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid;">
+                                                <b>Battery Weight (+-5%)</b>
+                                                :
+                                                <span t-esc="int(production.product_id.weight)"/>
+                                                <t t-esc="production.product_id.weight_uom_name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid;">
+                                                <b>Month &amp; Year of Mfg</b>
+                                                :
+                                                <span t-esc="move.create_date.strftime('%B %Y')"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <p style="page-break-before:always;"></p>
+                        </div>
+                    </t>
+                </t>
+            <!--</div>-->
+        </t>
+    </template>
+
+    <report
+            string="Finished Product Label"
+            id="mrp.action_report_finished_product"
+            model="mrp.production"
+            name="mrp.label_production_view_pdf"
+            file="mrp.label_production_view_pdf"
+            report_type="qweb-pdf"
+            print_report_name="'Finished products - %s' % object.name"
+        />
+
+    <report id="mrp.label_manufacture_template"
+            model="mrp.production"
+            string="Finished Product Label (ZPL)"
+            name="mrp.label_production_view"
+            file="mrp.label_production_view"
+            report_type="qweb-text" menu="False"
+        />
+
+</odoo>
