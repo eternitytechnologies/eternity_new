@@ -12,7 +12,6 @@ WARNING = "warning"
 INFO = "info"
 DEFAULT = "default"
 
-
 class ResUsers(models.Model):
     _inherit = "res.users"
 
