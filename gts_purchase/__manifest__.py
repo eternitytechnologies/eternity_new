@@ -7,7 +7,7 @@
     'license': 'AGPL-3',
     'website': 'http://www.geotechnosoft.com',
     'category': '',
-    'depends': ['base', 'purchase'],
+    'depends': ['base', 'purchase','l10n_in_purchase'],
     'data': [
         'views/purchase_view.xml',
         'report/report_purchase_order_inherit.xml',
