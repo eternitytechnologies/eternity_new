@@ -7,7 +7,7 @@
     'license': 'AGPL-3',
     'website': 'http://www.geotechnosoft.com',
     'category': 'Inventory',
-    'depends': ['base', 'stock', 'sale_stock'],
+    'depends': ['base', 'stock', 'sale_stock','report_custom_layout'],
     'data': [
         'security/ir.model.access.csv',
         'report/report_delivery_document_inherit.xml',

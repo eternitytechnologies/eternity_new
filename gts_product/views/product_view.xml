@@ -27,8 +27,9 @@
                     <field name="calculate_ah"/>
                     <field name="volts"
                            attrs="{'invisible': ['|',('calculate_ah', '=', False),('product_type', '=', 'cell')], 'required': [('calculate_ah', '=', True)]}"/>
+<!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
                     <field name="ah"
-                            attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
+                           attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
 <!--                    <field name="standard_price_temp" groups="base.group_no_one"/>-->
 <!--                    <field name="default_code_temp" groups="base.group_no_one"/>-->
                 </field>
@@ -55,8 +56,8 @@
                     <field name="calculate_ah"/>
                     <field name="volts"
                            attrs="{'invisible': ['|',('calculate_ah', '=', False),('product_type', '=', 'cell')], 'required': [('calculate_ah', '=', True)]}"/>
-                    <field name="ah"
-                            attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
+<!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
+                    <field name="ah" attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
                 </field>
             </field>
         </record>

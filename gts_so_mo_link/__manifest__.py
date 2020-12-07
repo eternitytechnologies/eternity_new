@@ -11,7 +11,7 @@
     'sequence': 1,
     'author': 'Geo Technosoft',
     'website': 'https://www.geotechnosoft.com',
-    'depends': ['sale', 'mail', 'mrp_account', 'stock', 'mrp'],
+    'depends': ['sale', 'mail', 'mrp_account', 'stock', 'mrp','report_custom_layout'],
     'data': [
         'security/ir.model.access.csv',
         'security/security_view.xml',
