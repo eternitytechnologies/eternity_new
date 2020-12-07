@@ -130,7 +130,7 @@
                                     <span t-esc="new_index"/>
                                     <!--<span t-esc="order_line_index + 1"/>-->
                                 </td>
-                                <td>
+                                <td id="product">
                                      <span t-field="order_line.name"/>
                                     <!-- <div t-field="order_line.product_id.name"/>
                                     <div t-field="order_line.product_id.default_code"/> -->

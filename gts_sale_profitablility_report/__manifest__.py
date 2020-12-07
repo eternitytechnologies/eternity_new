@@ -7,7 +7,7 @@
     'license': 'AGPL-3',
     'website': 'http://www.geotechnosoft.com',
     'category': '',
-    'depends': ['sale','base'],
+    'depends': ['sale','base','gts_sale'],
     'data': [
         'security/ir.model.access.csv',
         'security/security_view.xml',
