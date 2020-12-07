@@ -6,7 +6,8 @@ from odoo.exceptions import Warning, UserError, ValidationError
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def _recompute_tax_lines(self):
+    def _recompute_tax_lines(self, recompute_tax_base_amount=False):
+
         ''' Compute the dynamic tax lines of the journal entry.
 
         :param lines_map: The line_ids dispatched by type containing:
