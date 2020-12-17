@@ -311,6 +311,6 @@
             name="gts_stock.warranty_card_stock_picking"
             file="gts_stock.warranty_card_stock_picking"
             report_type="qweb-pdf"
-            paperformat="report_custom_layout.warrenty_custom_paperformat"/>
+            paperformat="report_custom_layout.warranty_custom_paperformat"/>
 
 </odoo>
