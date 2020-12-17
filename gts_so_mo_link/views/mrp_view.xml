@@ -53,6 +53,9 @@
                 <attribute name="attrs">{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}
                 </attribute>
             </xpath>
+            <xpath expr="/form//header//button[13]" position="attributes">
+                <attribute name="confirm">"Are you sure want to cancel?"</attribute>
+            </xpath>
         </field>
     </record>
 
