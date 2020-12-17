@@ -34,6 +34,7 @@ class ProductTemplate(models.Model):
     product_type = fields.Selection([('battery', 'Battery'), ('cell', 'Cell')], string="Item Type")
     standard_price_temp = fields.Float('Temporary Cost')
     default_code_temp = fields.Char('Temporary Internal Code')
+    battery_weight = fields.Float("Battery Weight")
 
     def update_temp_fields(self):
         prod_template_ids = self.env['product.template'].search([])

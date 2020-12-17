@@ -54,7 +54,7 @@
                                             <td style="border:1px solid;">
                                                 <b>Battery Weight (+-5%)</b>
                                                 :
-                                                <span t-esc="int(production.product_id.weight)"/>
+                                                <span t-esc="int(production.product_id.battery_weight)"/>
                                                 <t t-esc="production.product_id.weight_uom_name"/>
                                             </td>
                                         </tr>
