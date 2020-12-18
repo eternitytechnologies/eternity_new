@@ -9,7 +9,7 @@
                 <field name="stock_lot_ids" widget="many2many_tags" readonly="1"/>
                 <field name="lot_with_qty" invisible="1"/>
                 <field name="lot_ids_reserved" widget="many2many_tags" readonly="1"/>
-                <field name="lot_with_qty_reserved" invisible="1"/>
+                <field name="lot_with_qty_reserved"/>
             </xpath>
             <xpath expr="//tree" position="attributes">
                 <attribute name="editable">bottom</attribute>

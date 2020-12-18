@@ -109,7 +109,7 @@ class StockMove(models.Model):
     lot_ids_reserved = fields.Many2many('stock.production.lot', 'rel_lot_mo_ref', 'rel_move_id', 'mo_id',
                                         string="Consumed Lot/Serial", copy=False)
     lot_with_qty = fields.Char("Lot With Quantity", copy=False)
-    lot_with_qty_reserved = fields.Char("Lot With Quantity", copy=False)
+    lot_with_qty_reserved = fields.Text("Lot With Quantity", copy=False)
 
     def _action_assign(self):
         res = super(StockMove, self)._action_assign()

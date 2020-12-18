@@ -9,7 +9,7 @@
         <xpath expr="//t[@t-set='address']" position="replace"/>
 
         <xpath expr="//div[hasclass('page')]" position="attributes">
-            <attribute name="style">margin-left:5mm;margin-right:5mm;</attribute>
+            <attribute name="style">margin-left:5mm;margin-right:5mm;font-weight:900;</attribute>
         </xpath>
 
         <xpath expr="//h2" position="before">
