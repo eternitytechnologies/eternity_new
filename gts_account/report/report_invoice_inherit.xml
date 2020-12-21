@@ -358,13 +358,7 @@
 
         <xpath expr="//div[@id='total']" position="replace">
             <div id="total" class="row">
-                <div class="col-8">
-                    <p t-if="o.narration" name="comment">
-                        <strong>Terms &amp; Conditions:</strong>
-                        <br/>
-                        <span t-raw="o.narration"/>
-                    </p>
-                </div>
+
                 <div class="col-4">
                     <table class="table table-sm;page-break-inside: avoid;">
                         <tr style="border: 2px solid black;" class="text-uppercase o_subtotal" >
@@ -381,17 +375,17 @@
                                         <span t-esc="amount_by_group[3]" />
                                     </td>
                                 </t>
-                                <t t-else="">
-                                    <td >
-                                        <span t-esc="amount_by_group[0]"/>
-                                        <span>&amp;nbsp;<span>on</span>
-                                            <t t-esc="amount_by_group[4]"/>
-                                        </span>
-                                    </td>
-                                    <td class="text-right o_price_total" style="border-left: 2px solid black;">
-                                        <span t-esc="amount_by_group[3]"/>
-                                    </td>
-                                </t>
+<!--                                <t t-else="">-->
+<!--                                    <td >-->
+<!--                                        <span t-esc="amount_by_group[0]"/>-->
+<!--                                        <span>&amp;nbsp;<span>on</span>-->
+<!--                                            <t t-esc="amount_by_group[4]"/>-->
+<!--                                        </span>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right o_price_total" style="border-left: 2px solid black;">-->
+<!--                                        <span t-esc="amount_by_group[3]"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
                             </tr>
                         </t>
                         <tr class="text-uppercase o_total" style="border: 2px solid black;">
@@ -401,25 +395,6 @@
                             </td>
                         </tr>
                     </table>
-                    <br/>
-                    <t t-if="o.x_with_signature">
-                        <div class="row" style="page-break-inside: avoid;">
-                            <div class="ml-auto text-center">
-                                <div>
-                                    <strong>For
-                                        <span t-field="o.company_id"/>
-                                    </strong>
-                                </div>
-                                <!--<t t-if="o.x_with_signature">-->
-                                <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
-                                <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
-                                <!--</t>-->
-                                <div>
-                                    <strong>Authorized sign &amp; seal</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </t>
                 </div>
             </div>
         </xpath>
@@ -505,15 +480,15 @@
         <!--            <attribute name="class" add="text-uppercase"/>-->
         <!--        </xpath>-->
 
-        <!--        <xpath expr="//div[@id='total']/div" position="before">-->
-        <!--            <div class="col-8">-->
-        <!--                <p t-if="o.narration" name="comment">-->
-        <!--                    <strong>Terms &amp; Conditions:</strong>-->
-        <!--                    <br/>-->
-        <!--                    <span t-raw="o.narration"/>-->
-        <!--                </p>-->
-        <!--            </div>-->
-        <!--        </xpath>-->
+                <xpath expr="//div[@id='total']/div" position="before">
+                    <div class="col-8">
+                        <p t-if="o.narration" name="comment">
+                            <strong>Terms &amp; Conditions:</strong>
+                            <br/>
+                            <span t-raw="o.narration"/>
+                        </p>
+                    </div>
+                </xpath>
 
         <xpath expr="//p[@name='payment_term']" position="replace"/>
 
@@ -556,27 +531,27 @@
             </t>
         </xpath>
 
-<!--        <xpath expr="//div[@id='total']/div/table" position="after">-->
-<!--            <br/>-->
-<!--            <t t-if="o.x_with_signature">-->
-<!--                <div class="row" style="page-break-inside: avoid;">-->
-<!--                    <div class="ml-auto text-center">-->
-<!--                        <div>-->
-<!--                            <strong>For-->
-<!--                                <span t-field="o.company_id"/>-->
-<!--                            </strong>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;<t t-if="o.x_with_signature">&ndash;&gt;-->
-<!--                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>-->
-<!--                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>-->
-<!--                        &lt;!&ndash;</t>&ndash;&gt;-->
-<!--                        <div>-->
-<!--                            <strong>Authorized sign &amp; seal</strong>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </t>-->
-<!--        </xpath>-->
+        <xpath expr="//div[@id='total']/div/table" position="after">
+            <br/>
+            <t t-if="o.x_with_signature">
+                <div class="row" style="page-break-inside: avoid;">
+                    <div class="ml-auto text-center">
+                        <div>
+                            <strong>For
+                                <span t-field="o.company_id"/>
+                            </strong>
+                        </div>
+                        <!--<t t-if="o.x_with_signature">-->
+                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
+                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
+                        <!--</t>-->
+                        <div>
+                            <strong>Authorized sign &amp; seal</strong>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
     </template>
 
     <template id="report_invoice_without_hf_document1" inherit_id="report_invoice_document_jar" primary="True">
