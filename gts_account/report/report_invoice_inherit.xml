@@ -9,7 +9,7 @@
         <xpath expr="//t[@t-set='address']" position="replace"/>
 
         <xpath expr="//div[hasclass('page')]" position="attributes">
-            <attribute name="style">margin-left:5mm;margin-right:5mm;font-weight:900;</attribute>
+            <attribute name="style">margin-left:5mm;margin-right:5mm;</attribute>
         </xpath>
 
         <xpath expr="//h2" position="before">
@@ -278,10 +278,10 @@
                                 <t t-if="line.display_type != 'line_note' or line.display_type != 'line_section'">
                                     <t t-set="new_index" t-value="new_index+1"/>
                                 </t>
-                                <td class="text-center" style="border: 1.5px solid black;">
+                                <td class="text-center" style="border: 2px solid black;">
                                     <span t-esc="new_index"/>
                                 </td>
-                                <td name="account_invoice_line_name" style="border: 1.5px solid black;">
+                                <td name="account_invoice_line_name" style="border: 2px solid black;">
                                     <t t-if="line.product_id">
                                         <span t-if="o.type in ['out_invoice', 'out_refund']" t-field="line.product_id.description_sale"/>
                                         <span t-if="o.type in ['in_invoice', 'in_refund']" t-field="line.product_id.description_purchase"/>
@@ -300,26 +300,26 @@
                                     </t>
                                 </td>
                                 <!--                                <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>-->
-                                <td style="border: 1.5px solid black;">
+                                <td style="border: 2px solid black;">
                                     <span t-if="line.product_id.l10n_in_hsn_code" t-field="line.product_id.l10n_in_hsn_code"/>
                                 </td>
-                                <td class="text-right" style="border: 1.5px solid black;">
+                                <td class="text-right" style="border: 2px solid black;">
                                     <span t-field="line.quantity"/>
                                     <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
                                 </td>
-                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 1.5px solid black;">
+                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid black;">
                                     <span class="text-nowrap" t-field="line.price_unit"/>
                                 </td>
                                 <td t-if="display_discount"
-                                    t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 1.5px solid black;">
+                                    t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid black;">
                                     <span class="text-nowrap" t-field="line.discount"/>
                                 </td>
-                                <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 1.5px solid black;">
+                                <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid black;">
                                     <t t-foreach="line.get_tax_list()" t-as="tax_line">
                                         <span t-esc="tax_line.description or tax_line.name"/><br/>
                                     </t>
                                 </td>
-                                <td class="text-right o_price_total" style="border: 1.5px solid black;">
+                                <td class="text-right o_price_total" style="border:2px solid black;">
                                     <span class="text-nowrap" t-field="line.price_subtotal"
                                           groups="account.group_show_line_subtotals_tax_excluded"/>
                                     <span class="text-nowrap" t-field="line.price_total"
@@ -327,14 +327,14 @@
                                 </td>
                             </t>
                             <t t-if="line.display_type == 'line_section'">
-                                <td colspan="99" style="border: 1.5px solid black;">
+                                <td colspan="99" style="border: 2px solid black;">
                                     <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                 </td>
                                 <t t-set="current_section" t-value="line"/>
                                 <t t-set="current_subtotal" t-value="0"/>
                             </t>
                             <t t-if="line.display_type == 'line_note'">
-                                <td colspan="99" style="border: 1.5px solid black;">
+                                <td colspan="99" style="border: 2px solid black;">
                                     <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                 </td>
                             </t>
@@ -342,7 +342,7 @@
 
                         <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
                             <tr class="is-subtotal text-right">
-                                <td colspan="99" style="border: 1.5px solid black;">
+                                <td colspan="99" style="border: 2px solid black;">
                                     <strong class="mr16">Subtotal</strong>
                                     <span
                                             t-esc="current_subtotal"
@@ -360,17 +360,17 @@
             <div id="total" class="row">
                 <div class="col-4">
                     <table class="table table-sm;page-break-inside: avoid;">
-                        <tr style="border: 1.5px solid black;" class="text-uppercase o_subtotal" >
+                        <tr style="border: 2px solid black;" class="text-uppercase o_subtotal" >
                             <td ><strong>Subtotal</strong></td>
-                            <td class="text-right" style="border-left: 1.5px solid black;">
+                            <td class="text-right" style="border-left: 2px solid black;">
                                 <span t-field="o.amount_untaxed"/>
                             </td>
                         </tr>
                         <t t-foreach="o.amount_by_group" t-as="amount_by_group">
-                            <tr style="border: 1.5px solid black;">
+                            <tr style="border:2px solid black;">
                                 <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) == 1 and o.amount_untaxed == amount_by_group[2]">
                                     <td ><span t-esc="amount_by_group[0]"/></td>
-                                    <td class="text-right o_price_total" style="border-left: 1.5px solid black;">
+                                    <td class="text-right o_price_total" style="border-left: 2px solid black;">
                                         <span t-esc="amount_by_group[3]" />
                                     </td>
                                 </t>
@@ -381,15 +381,15 @@
                                             <t t-esc="amount_by_group[4]"/>
                                         </span>
                                     </td>
-                                    <td class="text-right o_price_total" style="border-left: 1.5px solid black;">
+                                    <td class="text-right o_price_total" style="border-left: 2px solid black;">
                                         <span t-esc="amount_by_group[3]"/>
                                     </td>
                                 </t>
                             </tr>
                         </t>
-                        <tr class="text-uppercase o_total" style="border: 1.5px solid black;">
+                        <tr class="text-uppercase o_total" style="border: 2px solid black;">
                             <td ><strong>Total</strong></td>
-                            <td class="text-right" style="border-left: 1.5px solid black;">
+                            <td class="text-right" style="border-left: 2px solid black;">
                                 <span t-field="o.amount_total"/>
                             </td>
                         </tr>
