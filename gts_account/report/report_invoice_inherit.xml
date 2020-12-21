@@ -359,7 +359,7 @@
         <xpath expr="//div[@id='total']" position="replace">
             <div id="total" class="row">
 
-                <div class="col-5">
+                <div class="col-4">
                     <table class="table table-sm;page-break-inside: avoid;">
                         <tr style="border: 2px solid black;" class="text-uppercase o_subtotal" >
                             <td ><strong>Subtotal</strong></td>
@@ -481,7 +481,7 @@
         <!--        </xpath>-->
 
                 <xpath expr="//div[@id='total']/div" position="before">
-                    <div class="col-7" >
+                    <div class="col-8">
                         <p t-if="o.narration" name="comment">
                             <strong>Terms &amp; Conditions:</strong>
                             <br/>
@@ -493,6 +493,7 @@
         <xpath expr="//p[@name='payment_term']" position="replace"/>
 
         <xpath expr="//p[@id='total_in_words']" position="replace">
+            <br/>
             <p id="total_in_words" class="mb16">
                 <strong>Amount In Words:</strong>
                 <span t-esc="o.amount_total_words.replace(',', '')"/>
@@ -542,8 +543,8 @@
                             </strong>
                         </div>
                         <!--<t t-if="o.x_with_signature">-->
-                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
-                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
+                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 100px;"/>
+                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 100px;"/>
                         <!--</t>-->
                         <div>
                             <strong>Authorized sign &amp; seal</strong>
