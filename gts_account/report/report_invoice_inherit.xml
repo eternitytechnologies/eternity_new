@@ -493,7 +493,7 @@
         <xpath expr="//p[@name='payment_term']" position="replace"/>
 
         <xpath expr="//p[@id='total_in_words']" position="replace">
-            <br/>
+
             <p id="total_in_words" class="mb16">
                 <strong>Amount In Words:</strong>
                 <span t-esc="o.amount_total_words.replace(',', '')"/>
