@@ -533,7 +533,6 @@
         </xpath>
 
         <xpath expr="//div[@id='total']/div/table" position="after">
-            <br/>
             <t t-if="o.x_with_signature">
                 <div class="row" style="page-break-inside: avoid;">
                     <div class="ml-auto text-center">
