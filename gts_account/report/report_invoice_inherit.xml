@@ -278,10 +278,10 @@
                                 <t t-if="line.display_type != 'line_note' or line.display_type != 'line_section'">
                                     <t t-set="new_index" t-value="new_index+1"/>
                                 </t>
-                                <td class="text-center" style="border: 2px solid black;">
+                                <td class="text-center" style="border-left: 2px solid black;">
                                     <span t-esc="new_index"/>
                                 </td>
-                                <td name="account_invoice_line_name" style="border: 2px solid black;">
+                                <td name="account_invoice_line_name" style="border:2px solid black;">
                                     <t t-if="line.product_id">
                                         <span t-if="o.type in ['out_invoice', 'out_refund']" t-field="line.product_id.description_sale"/>
                                         <span t-if="o.type in ['in_invoice', 'in_refund']" t-field="line.product_id.description_purchase"/>
@@ -363,26 +363,26 @@
                     <table class="table table-sm;page-break-inside: avoid;">
                         <tr style="border: 2px solid black;" class="text-uppercase o_subtotal" >
                             <td ><strong>Subtotal</strong></td>
-                            <td class="text-right" style="border-left: 2px solid black;">
+                            <td class="text-right">
                                 <span t-field="o.amount_untaxed"/>
                             </td>
                         </tr>
                         <t t-foreach="o.amount_by_group" t-as="amount_by_group">
-                            <tr style="border:2px solid black;">
+                            <tr>
                                 <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) == 1 and o.amount_untaxed == amount_by_group[2]">
-                                    <td ><span t-esc="amount_by_group[0]"/></td>
-                                    <td class="text-right o_price_total" style="border-left: 2px solid black;">
-                                        <span t-esc="amount_by_group[3]" />
+                                    <td style="border-left: 2px solid black;border-right: 2px solid black;"><span t-esc="amount_by_group[0]"/></td>
+                                    <td class="text-right o_price_total" style="border-right: 2px solid black;">
+                                        <span t-esc="amount_by_group[3]"/>
                                     </td>
                                 </t>
                                 <t t-else="">
-                                    <td >
+                                    <td style="border-left: 2px solid black;border-right: 2px solid black;">
                                         <span t-esc="amount_by_group[0]"/>
                                         <span>&amp;nbsp;<span>on</span>
                                             <t t-esc="amount_by_group[4]"/>
                                         </span>
                                     </td>
-                                    <td class="text-right o_price_total" style="border-left: 2px solid black;">
+                                    <td class="text-right o_price_total" style="border-right: 2px solid black;">
                                         <span t-esc="amount_by_group[3]"/>
                                     </td>
                                 </t>
@@ -390,7 +390,7 @@
                         </t>
                         <tr class="text-uppercase o_total" style="border: 2px solid black;">
                             <td ><strong>Total</strong></td>
-                            <td class="text-right" style="border-left: 2px solid black;">
+                            <td class="text-right">
                                 <span t-field="o.amount_total"/>
                             </td>
                         </tr>
@@ -542,8 +542,8 @@
                             </strong>
                         </div>
                         <!--<t t-if="o.x_with_signature">-->
-                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 100px;"/>
-                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 100px;"/>
+                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
+                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
                         <!--</t>-->
                         <div>
                             <strong>Authorized sign &amp; seal</strong>

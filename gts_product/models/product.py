@@ -163,3 +163,36 @@ class ProductProduct(models.Model):
                 products.standard_price = tmpl_id.standard_price_temp
                 products.default_code = tmpl_id.default_code_temp
         return products
+
+    # standard_price = fields.Float(
+    #     'Cost', company_dependent=True, compute='set_cost',
+    #     digits='Product Price',
+    #     groups="base.group_user",
+    #     help="""In Standard Price & AVCO: value of the product (automatically computed in AVCO).
+    #         In FIFO: value of the last unit that left the stock (automatically computed).
+    #         Used to value the product when the purchase cost is not known (e.g. inventory adjustment).
+    #         Used to compute margins on sale orders.""")
+    #
+    # @api.depends('name')
+    # def set_cost(self):
+    #     if self.purchase_ok:
+    #         po=[]
+    #         value = 0.0
+    #         tot_qty = 0.0
+    #         bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', self.id),
+    #              ('move_id.state', '!=', 'cancel')])
+    #         bill_len = len(bills)
+    #         for bill in bills:
+    #             value += bill.quantity * bill.price_unit
+    #             tot_qty += bill.quantity
+    #         unit_cost = 0.0
+    #         if value != 0 or tot_qty != 0:
+    #             unit_cost = value / tot_qty
+    #             self.standard_price = unit_cost / bill_len
+    #         else:
+    #             self.standard_price = self.standard_price
+    #     else:
+    #         self.standard_price = self.standard_price
+
+
+

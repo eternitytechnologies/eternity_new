@@ -26,7 +26,7 @@
                     <field name="margin" attrs="{'column_invisible': [('parent.type', '!=', 'out_invoice')]}" groups="gts_account.group_gross_profit_on_invoice"/>
                 </xpath>
 
-                <xpath expr="//notebook/page/group/field[@name='amount_residual']" position="after">
+                <xpath expr="//notebook/page/group//field[@name='amount_residual']" position="after">
                     <field name="total_purchase_price" attrs="{'invisible': [('type', '!=', 'out_invoice')]}" groups="gts_account.group_gross_profit_on_invoice"/>
                     <field name="margin" attrs="{'invisible': [('type', '!=', 'out_invoice')]}" groups="gts_account.group_gross_profit_on_invoice"/>
                     <field name="margin_percentage" attrs="{'invisible': [('type', '!=', 'out_invoice')]}" groups="gts_account.group_gross_profit_on_invoice"/>
