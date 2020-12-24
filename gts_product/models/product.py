@@ -166,9 +166,10 @@ class ProductProduct(models.Model):
 
     # custom_standard_price = fields.Float(compute='set_cost',help="")
     #
-    # @api.depends('active')
+    # @api.depends('name')
     # def set_cost(self):
-    #     for product in self:
+    #     products = self.env['product.product'].search([('type','!=','service')])
+    #     for product in products:
     #         if product.active:
     #             tot_unit_price=0.0
     #             bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', self.id),
@@ -188,6 +189,6 @@ class ProductProduct(models.Model):
     #                 product.custom_standard_price = product.standard_price
     #         else:
     #             product.custom_standard_price = product.standard_price
-
-
+    #
+    #
 

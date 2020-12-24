@@ -63,7 +63,6 @@
                                             <b> <span t-esc="cell_type"/> </b>
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
                                             <b>Invoice Reference</b>
