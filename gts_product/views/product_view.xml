@@ -61,8 +61,8 @@
                     <field name="ah" attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
                     <field name="battery_weight" attrs="{'invisible': [('product_type', '=', 'cell')]}"/>
                 </field>
-<!--                <xpath expr="//field[@name='standard_price']" position="replace">-->
-<!--                    <field name="standard_price"/>-->
+<!--                <xpath expr="//field[@name='standard_price']" position="after">-->
+<!--                    <field name="custom_standard_price" invisible="1"/>-->
 <!--                </xpath>-->
             </field>
         </record>

@@ -5,7 +5,7 @@ class WarrantyCard(models.AbstractModel):
     """ Model to contain the information related to printing the information about
     the COA report"""
 
-    _name = "report.gts_so_mo_link.warrenty_view_pdf"
+    _name = "report.gts_so_mo_link.warranty_view_pdf"
 
     @api.model
     def _get_report_values(self, docids, data=None):
