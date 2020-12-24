@@ -39,6 +39,7 @@ class WarrantyCard(models.AbstractModel):
             'data': data,
             'docs': mrp,
             'serial_nos':serial_numbers,
+            'serial_len':len(serial_numbers),
             'inv_ref':inv_ref,
             'warranty':warranty
         }
