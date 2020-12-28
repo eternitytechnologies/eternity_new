@@ -164,31 +164,31 @@ class ProductProduct(models.Model):
                 products.default_code = tmpl_id.default_code_temp
         return products
 
-    # custom_standard_price = fields.Float(compute='set_cost',help="")
-    #
-    # @api.depends('name')
-    # def set_cost(self):
-    #     products = self.env['product.product'].search([('type','!=','service')])
-    #     for product in products:
-    #         if product.active:
-    #             tot_unit_price=0.0
-    #             bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', self.id),
-    #                  ('move_id.state', '!=', 'cancel')])
-    #             po_len = len(bills.purchase_line_id)
-    #             for bill in bills:
-    #                 # value += bill.quantity * bill.price_unit
-    #                 tot_unit_price += bill.price_unit
-    #                 # tot_qty += bill.quantity
-    #             unit_cost = 0.0
-    #             # if value != 0 or tot_qty != 0:
-    #             if tot_unit_price != 0 and product.categ_id.property_cost_method == 'average':
-    #                 # unit_cost = value / tot_qty
-    #                 product.custom_standard_price = tot_unit_price / po_len
-    #                 product.standard_price = product.custom_standard_price
-    #             else:
-    #                 product.custom_standard_price = product.standard_price
-    #         else:
-    #             product.custom_standard_price = product.standard_price
-    #
-    #
+    custom_standard_price = fields.Float(compute='set_cost',help="")
+
+    @api.depends('name')
+    def set_cost(self):
+        products = self.env['product.product'].search([('type','!=','service')])
+        for product in products:
+            if product.active:
+                tot_unit_price=0.0
+                bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', self.id),
+                     ('move_id.state', '!=', 'cancel')])
+                po_len = len(bills.purchase_line_id)
+                for bill in bills:
+                    # value += bill.quantity * bill.price_unit
+                    tot_unit_price += bill.price_unit
+                    # tot_qty += bill.quantity
+                unit_cost = 0.0
+                # if value != 0 or tot_qty != 0:
+                if tot_unit_price != 0 and product.categ_id.property_cost_method == 'average':
+                    # unit_cost = value / tot_qty
+                    product.custom_standard_price = tot_unit_price / po_len
+                    product.standard_price = product.custom_standard_price
+                else:
+                    product.custom_standard_price = product.standard_price
+            else:
+                product.custom_standard_price = product.standard_price
+
+
 

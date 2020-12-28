@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Cron to synchronize transaction -->
+    <record id="update_cost_cron" model="ir.cron">
+        <field name="name">Update Cost</field>
+        <field name="model_id" ref="product.model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.set_cost()</field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

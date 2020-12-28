@@ -132,6 +132,7 @@ class LotQRReportMOCurrent(models.AbstractModel):
         if docs.production_id.state == 'cancel':
             raise exceptions.AccessError(_('You can not download QR Report for a Cancelled Manufacturing Order !'))
         return {
+            'data':data,
             'doc_ids': docs.ids,
             'doc_model': 'stock.production.lot',
             'docs': docs,
@@ -146,6 +147,7 @@ class LotQRReportMOUpcoming(models.AbstractModel):
         if docs.production_id.state == 'cancel':
             raise exceptions.AccessError(_('You can not download QR Report for a Cancelled Manufacturing Order !'))
         return {
+            'data':data,
             'doc_ids': docs.ids,
             'doc_model': 'stock.production.lot',
             'docs': docs,
