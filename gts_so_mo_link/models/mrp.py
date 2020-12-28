@@ -11,7 +11,7 @@ class MRPProduction(models.Model):
     _inherit = "mrp.production"
 
     partner_id = fields.Many2one('res.partner', string='Customer')
-    untaxed_amount = fields.Float('Untaxed Amount')
+    untaxed_amount = fields.Float('Untaxed Amount',compute="_compute_untaxed_amount")
     client_order_ref = fields.Char('Order Reference/ PO')
     delivery_date = fields.Datetime('Delivery Date')
     lot_numbers_count = fields.Integer('Lot Count', compute="_compute_lot_numbers", default=0, copy=False)
@@ -25,6 +25,18 @@ class MRPProduction(models.Model):
             for lines in rec.finished_move_line_ids:
                 if lines.lot_id.id:
                     rec.lot_numbers_count += 1
+
+    @api.depends('name')
+    def _compute_untaxed_amount(self):
+        for rec in self:
+            if rec.name:
+               so_rel = self.env['sale.order'].search([('name','=',rec.origin)])
+               untaxed_amount = 0.0
+               for sales in so_rel:
+                   untaxed_amount += sales.amount_untaxed
+               rec.untaxed_amount = untaxed_amount
+            else:
+                rec.untaxed_amount = 0.0
 
     def action_view_lot_numbers(self):
         action = self.env.ref('stock.action_production_lot_form').read()[0]
@@ -132,6 +144,7 @@ class LotQRReportMOCurrent(models.AbstractModel):
         if docs.production_id.state == 'cancel':
             raise exceptions.AccessError(_('You can not download QR Report for a Cancelled Manufacturing Order !'))
         return {
+            'data':data,
             'doc_ids': docs.ids,
             'doc_model': 'stock.production.lot',
             'docs': docs,
@@ -146,6 +159,7 @@ class LotQRReportMOUpcoming(models.AbstractModel):
         if docs.production_id.state == 'cancel':
             raise exceptions.AccessError(_('You can not download QR Report for a Cancelled Manufacturing Order !'))
         return {
+            'data':data,
             'doc_ids': docs.ids,
             'doc_model': 'stock.production.lot',
             'docs': docs,
