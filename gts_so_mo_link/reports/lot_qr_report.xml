@@ -86,7 +86,7 @@
                                                 :
                                             </td>
                                             <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
-                                                <span t-esc="int(o.product_id.weight)"/>
+                                                <span t-esc="int(o.product_id.battery_weight)"/>
                                                 <t t-esc="o.product_id.weight_uom_name"/>
                                             </td>
                                         </tr>
@@ -222,7 +222,7 @@
                                                 :
                                             </td>
                                             <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
-                                                <span t-esc="int(o.product_id.weight)"/>
+                                                <span t-esc="int(o.product_id.battery_weight)"/>
                                                 <t t-esc="o.product_id.weight_uom_name"/>
                                             </td>
                                         </tr>

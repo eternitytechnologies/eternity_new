@@ -9,23 +9,23 @@
               <style>
                 .cust_table{
                   width: 100%;
-                  border: 1px solid black;
+                  border: 2px solid black;
                   border-collapse: collapse;
                 }
                 .cust_table th, .cust_table td{
-                  border: 1px solid black;
+                  border: 2px solid black;
                   padding: 4px;
                 }
                 .bottom_border{
-                  border-bottom: 1px solid black;
+                  border-bottom: 2px solid black;
                 }
                 .invoice_table {
                   width: 100%;
-                  border: 1px solid black;
+                  border: 2px solid black;
                   border-collapse: collapse;
                 }
                 .invoice_table th, .invoice_table td {
-                  border-right: 1px solid black;
+                  border-right: 2px solid black;
                   padding: 4px;
                 }
               </style>

@@ -8,7 +8,7 @@
                 <t t-call="web.basic_layout">
                     <t t-set="cell_type" t-value=""/>
                     <t t-foreach="o.move_raw_ids" t-as="comp">
-                        <t t-if="comp.product_id.product_type=='cell' and comp.product_uom_qty > 0">
+                        <t t-if="comp.product_id.product_type=='cell' and comp.product_uom_qty > 0 and not cell_type">
                             <t t-set="cell_type" t-value="comp.product_id.name"/>
                         </t>
                     </t>
@@ -76,7 +76,7 @@
                                                     :
                                                 </td>
                                                 <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
-                                                    <span t-esc="int(li.product_id.weight)"/>
+                                                    <span t-esc="int(li.product_id.battery_weight)"/>
                                                     <t t-esc="li.product_id.weight_uom_name"/>
                                                 </td>
                                             </tr>
@@ -127,7 +127,7 @@
                 <t t-call="web.external_layout">
                     <t t-set="cell_type" t-value=""/>
                     <t t-foreach="o.move_raw_ids" t-as="comp">
-                        <t t-if="comp.product_id.product_type=='cell' and comp.product_uom_qty &gt; 0">
+                        <t t-if="comp.product_id.product_type=='cell' and comp.product_uom_qty &gt; 0 and not cell_type">
                             <t t-set="cell_type" t-value="comp.product_id.name"/>
                         </t>
                     </t>
@@ -201,7 +201,7 @@
                                                     :
                                                 </td>
                                                 <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
-                                                    <span t-esc="int(li.product_id.weight)"/>
+                                                    <span t-esc="int(li.product_id.battery_weight)"/>
                                                     <t t-esc="li.product_id.weight_uom_name"/>
                                                 </td>
                                             </tr>

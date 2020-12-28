@@ -30,6 +30,7 @@
 <!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
                     <field name="ah"
                            attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
+                    <field name="battery_weight" attrs="{'invisible': [('product_type', '=', 'cell')]}"/>
 <!--                    <field name="standard_price_temp" groups="base.group_no_one"/>-->
 <!--                    <field name="default_code_temp" groups="base.group_no_one"/>-->
                 </field>
@@ -58,7 +59,11 @@
                            attrs="{'invisible': ['|',('calculate_ah', '=', False),('product_type', '=', 'cell')], 'required': [('calculate_ah', '=', True)]}"/>
 <!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
                     <field name="ah" attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
+                    <field name="battery_weight" attrs="{'invisible': [('product_type', '=', 'cell')]}"/>
                 </field>
+<!--                <xpath expr="//field[@name='standard_price']" position="after">-->
+<!--                    <field name="custom_standard_price" invisible="1"/>-->
+<!--                </xpath>-->
             </field>
         </record>
 

@@ -51,8 +51,8 @@
             <field name="dpi">100</field>
         </record>
 
-        <record id="warrenty_custom_paperformat" model="report.paperformat">
-            <field name="name">Custom Paperformat Warrenty</field>
+        <record id="warranty_custom_paperformat" model="report.paperformat">
+            <field name="name">Custom Paperformat Warranty</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
             <field name="page_height">60</field>

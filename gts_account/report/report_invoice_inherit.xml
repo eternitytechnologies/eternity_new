@@ -236,29 +236,29 @@
 
         <xpath expr="//table[@name='invoice_line_table']" position="replace">
             <table class="table table-sm o_main_table" name="invoice_line_table">
-                <thead>
-                    <tr>
+                <thead >
+                    <tr >
                         <!-- TODO: remove in master -->
                         <t t-set="colspan" t-value="6"/>
-                        <th><span>S.No.</span></th>
-                        <th name="th_description" class="text-left"><span>Description</span></th>
+                        <th style="border: 2px solid black;"><span>S.No.</span></th>
+                        <th style="border: 2px solid black;" name="th_description" class="text-left"><span>Description</span></th>
                         <!-- TODO: remove in master -->
                         <t t-if="o.company_id.country_id.code == 'IN'">
-                            <th>
+                            <th style="border: 2px solid black;">
                                 <span>HSN/SAC</span>
                                 <t t-set="colspan" t-value="colspan+1"/>
                             </th>
                         </t>
-<!--                        <th name="th_source" class="d-none text-left" t-if="0"><span>Source Document</span></th>-->
-                        <th name="th_quantity" class="text-right"><span>Qty</span></th>
-                        <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
-                        <th name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                        <!--                        <th name="th_source" class="d-none text-left" t-if="0"><span>Source Document</span></th>-->
+                        <th style="border: 2px solid black;" name="th_quantity" class="text-right"><span>Qty</span></th>
+                        <th style="border: 2px solid black;" name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                        <th style="border: 2px solid black;" name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                             <span>Disc.%</span>
                             <!-- TODO: remove in master -->
                             <t t-set="colspan" t-value="colspan+1"/>
                         </th>
-                        <th name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
-                        <th name="th_subtotal" class="text-right">
+                        <th style="border: 2px solid black;" name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                        <th style="border: 2px solid black;" name="th_subtotal" class="text-right">
                             <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
                             <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
                         </th>
@@ -273,15 +273,15 @@
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
 
-                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''" >
                             <t t-if="not line.display_type" name="account_invoice_line_accountable">
                                 <t t-if="line.display_type != 'line_note' or line.display_type != 'line_section'">
                                     <t t-set="new_index" t-value="new_index+1"/>
                                 </t>
-                                <td class="text-center">
+                                <td class="text-center" style="border-left: 2px solid black;">
                                     <span t-esc="new_index"/>
                                 </td>
-                                <td name="account_invoice_line_name">
+                                <td name="account_invoice_line_name" style="border:2px solid black;">
                                     <t t-if="line.product_id">
                                         <span t-if="o.type in ['out_invoice', 'out_refund']" t-field="line.product_id.description_sale"/>
                                         <span t-if="o.type in ['in_invoice', 'in_refund']" t-field="line.product_id.description_purchase"/>
@@ -292,35 +292,34 @@
                                     <t t-if="line.product_id.product_template_attribute_value_ids">
                                         <br/>
                                         <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="pt">
-                                             <t t-if="pt.name != 'NA'">
-                                                 <span t-field="pt.display_name"/>
-                                                 <br/>
-                                             </t>
+                                            <t t-if="pt.name != 'NA'">
+                                                <span t-field="pt.display_name"/>
+                                            </t>
                                             <br/>
                                         </t>
                                     </t>
                                 </td>
-<!--                                <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>-->
-                                <td>
+                                <!--                                <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>-->
+                                <td style="border: 2px solid black;">
                                     <span t-if="line.product_id.l10n_in_hsn_code" t-field="line.product_id.l10n_in_hsn_code"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right" style="border: 2px solid black;">
                                     <span t-field="line.quantity"/>
                                     <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
                                 </td>
-                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid black;">
                                     <span class="text-nowrap" t-field="line.price_unit"/>
                                 </td>
                                 <td t-if="display_discount"
-                                    t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid black;">
                                     <span class="text-nowrap" t-field="line.discount"/>
                                 </td>
-                                <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid black;">
                                     <t t-foreach="line.get_tax_list()" t-as="tax_line">
                                         <span t-esc="tax_line.description or tax_line.name"/><br/>
                                     </t>
                                 </td>
-                                <td class="text-right o_price_total">
+                                <td class="text-right o_price_total" style="border:2px solid black;">
                                     <span class="text-nowrap" t-field="line.price_subtotal"
                                           groups="account.group_show_line_subtotals_tax_excluded"/>
                                     <span class="text-nowrap" t-field="line.price_total"
@@ -328,14 +327,14 @@
                                 </td>
                             </t>
                             <t t-if="line.display_type == 'line_section'">
-                                <td colspan="99">
+                                <td colspan="99" style="border: 2px solid black;">
                                     <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                 </td>
                                 <t t-set="current_section" t-value="line"/>
                                 <t t-set="current_subtotal" t-value="0"/>
                             </t>
                             <t t-if="line.display_type == 'line_note'">
-                                <td colspan="99">
+                                <td colspan="99" style="border: 2px solid black;">
                                     <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                 </td>
                             </t>
@@ -343,11 +342,11 @@
 
                         <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
                             <tr class="is-subtotal text-right">
-                                <td colspan="99">
+                                <td colspan="99" style="border: 2px solid black;">
                                     <strong class="mr16">Subtotal</strong>
                                     <span
-                                        t-esc="current_subtotal"
-                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            t-esc="current_subtotal"
+                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                     />
                                 </td>
                             </tr>
@@ -357,180 +356,224 @@
             </table>
         </xpath>
 
-<!--        <xpath expr="//tbody[hasclass('invoice_tbody')]/t[@t-set='lines']" position="before">-->
-<!--            <t t-set="new_index" t-value="0"/>-->
-<!--        </xpath>-->
+        <xpath expr="//div[@id='total']" position="replace">
+            <div id="total" class="row">
 
-<!--        <xpath expr="//span[text() = 'Description']/parent::th" position="before">-->
-<!--            <th>-->
-<!--                <span>S.No.</span>-->
-<!--            </th>-->
-<!--        </xpath>-->
-<!--        <xpath expr="//td[@name='account_invoice_line_name']" position="before">-->
-<!--            <t t-if="line.display_type != 'line_note' or line.display_type != 'line_section'">-->
-<!--                <t t-set="new_index" t-value="new_index+1"/>-->
-<!--            </t>-->
-<!--            <td class="text-center">-->
-<!--                <span t-esc="new_index"/>-->
-<!--            </td>-->
-<!--        </xpath>-->
-
-<!--        <xpath expr="//th[text() = 'HSN/SAC']" position="replace"/>-->
-<!--        <xpath expr="//span[@t-if='line.product_id.l10n_in_hsn_code']/parent::td" position="replace"/>-->
-
-<!--        <xpath expr="//span[text() = 'Description']/parent::th" position="after">-->
-<!--            <t t-if="o.company_id.country_id.code == 'IN'">-->
-<!--                <th>-->
-<!--                    <span>HSN/SAC</span>-->
-<!--                    <t t-set="colspan" t-value="colspan+1"/>-->
-<!--                </th>-->
-<!--            </t>-->
-<!--        </xpath>-->
-<!--        <xpath expr="//td[@name='account_invoice_line_name']" position="after">-->
-<!--            <td>-->
-<!--                <span t-if="line.product_id.l10n_in_hsn_code" t-field="line.product_id.l10n_in_hsn_code"/>-->
-<!--            </td>-->
-<!--        </xpath>-->
-
-<!--        <xpath expr="//th[@name='th_quantity']" position="replace">-->
-<!--            <th name="th_quantity" class="text-center"><span>Qty</span></th>-->
-<!--        </xpath>-->
-<!--        <xpath expr="//tbody/t/tr/t[@name='account_invoice_line_accountable']/td[4]" position="replace">-->
-<!--            <td class="text-center">-->
-<!--                <span t-field="line.quantity"/>-->
-<!--                <span t-field="line.product_uom_id"  groups="uom.group_uom"/>-->
-<!--            </td>-->
-<!--        </xpath>-->
-<!--        <xpath expr="//tbody/t/tr/t[@name='account_invoice_line_accountable']/td[5]" position="replace">-->
-<!--            <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">-->
-<!--                <span t-esc="'\n '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>-->
-<!--            </td>-->
-<!--        </xpath>-->
-<!--        <xpath expr="//td[@name='account_invoice_line_name']" position="replace">-->
-<!--            <td name="account_invoice_line_name">-->
-<!--                <t t-if="line.product_id">-->
-<!--                    <span t-if="o.type in ['out_invoice', 'out_refund']" t-field="line.product_id.description_sale"/>-->
-<!--                    <span t-if="o.type in ['in_invoice', 'in_refund']" t-field="line.product_id.description_purchase"/>-->
-<!--                </t>-->
-<!--                <t t-else="">-->
-<!--                    <span t-field="line.name"/>-->
-<!--                </t>-->
-<!--                <t t-if="line.product_id.product_template_attribute_value_ids">-->
-<!--                    <br/>-->
-<!--                    <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="pt">-->
-<!--                        <span t-field="pt.display_name"/>-->
-<!--                        <br/>-->
-<!--                    </t>-->
-<!--                </t>-->
-<!--            </td>-->
-<!--        </xpath>-->
-
-        <xpath expr="//p[@t-if='o.narration']" position="replace"/>
-        <xpath expr="//div[@id='total']/div" position="attributes">
-            <attribute name="t-attf-class"/>
-            <attribute name="class">col-4</attribute>
-        </xpath>
-
-        <xpath expr="//div[@id='total']/div//tr[@class='border-black o_subtotal']/td" position="attributes">
-            <attribute name="class" add="text-uppercase"/>
-        </xpath>
-
-        <xpath expr="//div[@id='total']/div//tr[@class='border-black o_total']/td" position="attributes">
-            <attribute name="class" add="text-uppercase"/>
-        </xpath>
-
-        <xpath expr="//div[@id='total']/div" position="before">
-            <div class="col-8">
-                <p t-if="o.narration" name="comment">
-                    <strong>Terms &amp; Conditions:</strong>
-                    <br/>
-                    <span t-raw="o.narration"/>
-                </p>
-            </div>
-        </xpath>
-
-        <xpath expr="//p[@name='payment_term']" position="replace"/>
-
-        <xpath expr="//p[@id='total_in_words']" position="replace">
-            <p id="total_in_words" class="mb16">
-                <strong>Amount In Words:</strong>
-                <span t-esc="o.amount_total_words.replace(',', '')"/>
-            </p>
-            <t t-if="o.x_with_signature">
-                <br/><br/><br/>
-            </t>
-            <t t-if="not o.x_with_signature">
-                <p style="page-break-before:always;"> </p>
-            </t>
-            <t t-set="lot_values" t-value="o._get_invoiced_lot_values()"/>
-            <t t-if="lot_values">
-                <br/>
-                <h5>Battery Serial Number Details:</h5><br/>
-                <table groups="sale_stock.group_lot_on_invoice" class="table table-sm" style="width: 100%;" name="invoice_snln_table">
-                    <thead>
-                        <tr>
-                            <th width="30%"><span>Product</span></th>
-                            <th class="text-right"><span>Quantity</span></th>
-                            <th class="text-right"><span>Battery S.No.</span></th>
+                <div class="col-4">
+                    <table class="table table-sm;page-break-inside: avoid;">
+                        <tr style="border: 2px solid black;" class="text-uppercase o_subtotal" >
+                            <td ><strong>Subtotal</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_untaxed"/>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="lot_values" t-as="snln_line">
+                        <t t-foreach="o.amount_by_group" t-as="amount_by_group">
                             <tr>
-                                <td>Battery Number : <t t-esc="snln_line['product_name']"/></td>
-                                <td class="text-right">
-                                    <t t-esc="snln_line['quantity']"/>
-                                    <t t-esc="snln_line['uom_name']" groups="uom.group_uom"/>
+                            <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) == 1 and o.amount_untaxed == amount_by_group[2]">
+                                <td style="border-left: 2px solid black;border-right: 2px solid black;"><span t-esc="amount_by_group[0]"/></td>
+                                <td class="text-right o_price_total" style="border-right: 2px solid black;">
+                                    <span t-esc="amount_by_group[3]"/>
                                 </td>
-                                <td class="text-right"><t t-esc="snln_line['lot_name']"/></td>
-                            </tr>
+                            </t>
+                            <t t-else="">
+                                <td style="border-left: 2px solid black;border-right: 2px solid black;">
+                                    <span t-esc="amount_by_group[0]"/>
+<!--                                    <t t-if="'TCS' not in amount_by_group[0]">-->
+<!--                                        <span>&amp;nbsp;<span>on</span>-->
+<!--                                        <t t-esc="amount_by_group[4]"/>-->
+<!--                                        </span>-->
+<!--                                    </t>-->
+                            </td>
+                            <td class="text-right o_price_total" style="border-right: 2px solid black;">
+                                <span t-esc="amount_by_group[3]"/>
+                            </td>
                         </t>
-                    </tbody>
-                </table>
+                    </tr>
+                </t>
+                <tr class="text-uppercase o_total" style="border: 2px solid black;">
+                    <td ><strong>Total</strong></td>
+                    <td class="text-right">
+                        <span t-field="o.amount_total"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</xpath>
+        <!--        <xpath expr="//tbody[hasclass('invoice_tbody')]/t[@t-set='lines']" position="before">-->
+        <!--            <t t-set="new_index" t-value="0"/>-->
+        <!--        </xpath>-->
+
+        <!--        <xpath expr="//span[text() = 'Description']/parent::th" position="before">-->
+        <!--            <th>-->
+        <!--                <span>S.No.</span>-->
+        <!--            </th>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//td[@name='account_invoice_line_name']" position="before">-->
+        <!--            <t t-if="line.display_type != 'line_note' or line.display_type != 'line_section'">-->
+        <!--                <t t-set="new_index" t-value="new_index+1"/>-->
+        <!--            </t>-->
+        <!--            <td class="text-center">-->
+        <!--                <span t-esc="new_index"/>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+
+        <!--        <xpath expr="//th[text() = 'HSN/SAC']" position="replace"/>-->
+        <!--        <xpath expr="//span[@t-if='line.product_id.l10n_in_hsn_code']/parent::td" position="replace"/>-->
+
+        <!--        <xpath expr="//span[text() = 'Description']/parent::th" position="after">-->
+        <!--            <t t-if="o.company_id.country_id.code == 'IN'">-->
+        <!--                <th>-->
+        <!--                    <span>HSN/SAC</span>-->
+        <!--                    <t t-set="colspan" t-value="colspan+1"/>-->
+        <!--                </th>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//td[@name='account_invoice_line_name']" position="after">-->
+        <!--            <td>-->
+        <!--                <span t-if="line.product_id.l10n_in_hsn_code" t-field="line.product_id.l10n_in_hsn_code"/>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+
+        <!--        <xpath expr="//th[@name='th_quantity']" position="replace">-->
+        <!--            <th name="th_quantity" class="text-center"><span>Qty</span></th>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//tbody/t/tr/t[@name='account_invoice_line_accountable']/td[4]" position="replace">-->
+        <!--            <td class="text-center">-->
+        <!--                <span t-field="line.quantity"/>-->
+        <!--                <span t-field="line.product_uom_id"  groups="uom.group_uom"/>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//tbody/t/tr/t[@name='account_invoice_line_accountable']/td[5]" position="replace">-->
+        <!--            <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">-->
+        <!--                <span t-esc="'\n '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+        <!--        <xpath expr="//td[@name='account_invoice_line_name']" position="replace">-->
+        <!--            <td name="account_invoice_line_name">-->
+        <!--                <t t-if="line.product_id">-->
+        <!--                    <span t-if="o.type in ['out_invoice', 'out_refund']" t-field="line.product_id.description_sale"/>-->
+        <!--                    <span t-if="o.type in ['in_invoice', 'in_refund']" t-field="line.product_id.description_purchase"/>-->
+        <!--                </t>-->
+        <!--                <t t-else="">-->
+        <!--                    <span t-field="line.name"/>-->
+        <!--                </t>-->
+        <!--                <t t-if="line.product_id.product_template_attribute_value_ids">-->
+        <!--                    <br/>-->
+        <!--                    <t t-foreach="line.product_id.product_template_attribute_value_ids" t-as="pt">-->
+        <!--                        <span t-field="pt.display_name"/>-->
+        <!--                        <br/>-->
+        <!--                    </t>-->
+        <!--                </t>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+
+<xpath expr="//p[@t-if='o.narration']" position="replace"/>
+        <!--        <xpath expr="//div[@id='total']/div" position="attributes">-->
+        <!--            <attribute name="t-attf-class"/>-->
+        <!--            <attribute name="class">col-4</attribute>-->
+        <!--        </xpath>-->
+
+        <!--        <xpath expr="//div[@id='total']/div//tr[@class='o_subtotal']/td" position="attributes">-->
+        <!--            <attribute name="class" add="text-uppercase"/>-->
+        <!--        </xpath>-->
+
+        <!--        <xpath expr="//div[@id='total']/div//tr[@class='o_total']/td" position="attributes">-->
+        <!--            <attribute name="class" add="text-uppercase"/>-->
+        <!--        </xpath>-->
+
+<xpath expr="//div[@id='total']/div" position="before">
+<div class="col-8">
+    <p t-if="o.narration" name="comment">
+        <strong>Terms &amp; Conditions:</strong>
+        <br/>
+        <span t-raw="o.narration"/>
+    </p>
+</div>
+</xpath>
+
+<xpath expr="//p[@name='payment_term']" position="replace"/>
+
+<xpath expr="//p[@id='total_in_words']" position="replace">
+
+<p id="total_in_words" class="mb16">
+    <strong>Amount In Words:</strong>
+    <span t-esc="o.amount_total_words.replace(',', '')"/>
+</p>
+<t t-if="o.x_with_signature">
+    <br/><br/><br/>
+</t>
+<t t-if="not o.x_with_signature">
+    <p style="page-break-before:always;"> </p>
+</t>
+<t t-set="lot_values" t-value="o._get_invoiced_lot_values()"/>
+<t t-if="lot_values">
+    <br/>
+    <h5>Battery Serial Number Details:</h5><br/>
+    <table groups="sale_stock.group_lot_on_invoice" class="table table-sm" style="width: 100%;" name="invoice_snln_table">
+        <thead>
+            <tr>
+                <th width="30%"><span>Product</span></th>
+                <th class="text-right"><span>Quantity</span></th>
+                <th class="text-right"><span>Battery S.No.</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <t t-foreach="lot_values" t-as="snln_line">
+                <tr>
+                    <td>Battery Number : <t t-esc="snln_line['product_name']"/></td>
+                    <td class="text-right">
+                        <t t-esc="snln_line['quantity']"/>
+                        <t t-esc="snln_line['uom_name']" groups="uom.group_uom"/>
+                    </td>
+                    <td class="text-right"><t t-esc="snln_line['lot_name']"/></td>
+                </tr>
             </t>
-        </xpath>
+        </tbody>
+    </table>
+</t>
+</xpath>
 
-        <xpath expr="//div[@id='total']/div/table" position="after">
-            <br/>
-            <t t-if="o.x_with_signature">
-                <div class="row" style="page-break-inside: avoid;">
-                    <div class="ml-auto text-center">
-                        <div>
-                            <strong>For
-                                <span t-field="o.company_id"/>
-                            </strong>
-                        </div>
-                        <!--<t t-if="o.x_with_signature">-->
-                        <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
-                        <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
-                        <!--</t>-->
-                        <div>
-                            <strong>Authorized sign &amp; seal</strong>
-                        </div>
-                    </div>
-                </div>
-            </t>
-        </xpath>
-    </template>
+<xpath expr="//div[@id='total']/div/table" position="after">
+<t t-if="o.x_with_signature">
+    <div class="row" style="page-break-inside: avoid;">
+        <div class="ml-auto text-center">
+            <div>
+                <strong>For
+                    <span t-field="o.company_id"/>
+                </strong>
+            </div>
+            <!--<t t-if="o.x_with_signature">-->
+            <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
+            <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
+            <!--</t>-->
+            <div>
+                <strong>Authorized sign &amp; seal</strong>
+            </div>
+        </div>
+    </div>
+</t>
+</xpath>
+        </template>
 
-    <template id="report_invoice_without_hf_document1" inherit_id="report_invoice_document_jar" primary="True">
-        <xpath expr="//t[@t-call='report_custom_layout.external_layout_account_invoice_jar']" position="attributes">
-            <attribute name="t-call">web.basic_layout</attribute>
-        </xpath>
-        <xpath expr="//div[hasclass('page')]" position="attributes">
-            <attribute name="style">font-size: 14px;margin-left:5mm;margin-right:5mm;</attribute>
-        </xpath>
-        <xpath expr="." position="attributes">
-            <attribute name="t-name">gts_account.report_invoice_without_hf_document1</attribute>
-        </xpath>
-    </template>
+<template id="report_invoice_without_hf_document1" inherit_id="report_invoice_document_jar" primary="True">
+<xpath expr="//t[@t-call='report_custom_layout.external_layout_account_invoice_jar']" position="attributes">
+    <attribute name="t-call">web.basic_layout</attribute>
+</xpath>
+<xpath expr="//div[hasclass('page')]" position="attributes">
+    <attribute name="style">font-size: 14px;margin-left:5mm;margin-right:5mm;</attribute>
+</xpath>
+<xpath expr="." position="attributes">
+    <attribute name="t-name">gts_account.report_invoice_without_hf_document1</attribute>
+</xpath>
+</template>
 
-    <template id="report_invoice_without_hf">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="gts_account.report_invoice_without_hf_document1" t-lang="o.partner_id.lang"/>
-            </t>
-        </t>
-    </template>
+<template id="report_invoice_without_hf">
+<t t-call="web.html_container">
+    <t t-foreach="docs" t-as="o">
+        <t t-call="gts_account.report_invoice_without_hf_document1" t-lang="o.partner_id.lang"/>
+    </t>
+</t>
+</template>
 
-</odoo>
+        </odoo>
