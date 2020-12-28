@@ -171,16 +171,20 @@ class ProductProduct(models.Model):
         for product in products:
             if product.active:
                 tot_unit_price=0.0
-                bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', self.id),
-                     ('move_id.state', '!=', 'cancel')])
-                po_len = len(bills.purchase_line_id)
+                bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', self.id),('move_id.invoice_origin','!=',False),
+                     ('move_id.state', '=', 'posted')])
+                po_ref = []
                 for bill in bills:
                     # value += bill.quantity * bill.price_unit
+                    if bill.move_id.invoice_origin not in po_ref:
+                        po_ref.append(bill.move_id.invoice_origin)
+
                     tot_unit_price += bill.price_unit
                     # tot_qty += bill.quantity
                 # if value != 0 or tot_qty != 0:
                 unit_cost = 0.0
-                if tot_unit_price != 0 and product.categ_id.property_cost_method == 'average':
+                if tot_unit_price != 0.0 and product.categ_id.property_cost_method == 'average':
+                    po_len = len(po_ref)
                     # unit_cost = value / tot_qty
                     unit_cost = tot_unit_price / po_len
                     product.standard_price = unit_cost

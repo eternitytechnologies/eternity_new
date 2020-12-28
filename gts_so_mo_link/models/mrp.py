@@ -26,6 +26,8 @@ class MRPProduction(models.Model):
                 if lines.lot_id.id:
                     rec.lot_numbers_count += 1
 
+
+
     def action_view_lot_numbers(self):
         action = self.env.ref('stock.action_production_lot_form').read()[0]
         list_ids = []
