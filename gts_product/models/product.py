@@ -151,6 +151,8 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
+    battery_weight = fields.Float(related='product_tmpl_id.battery_weight',string="Battery Weight")
+
     @api.model_create_multi
     def create(self, vals_list):
         tmpl_obj = self.env['product.template']
