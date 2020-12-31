@@ -230,6 +230,7 @@
                     <field name="x_studio_buyer_inquiry_date" string="Buyer Inquiry Date"/>
                     <field name="x_studio_delivery_period" string="Delivery Period"/>
                     <field name="x_studio_warranty_period" string="Warranty Period"/>
+<!--                    <field name="categ_id"/>-->
                 </xpath>
                 <xpath expr="//group[@name='sale_shipping']" position="replace"/>
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">

@@ -55,6 +55,8 @@ class SaleOrder(models.Model):
     invoice_created = fields.Boolean("Invoice Created", copy=False, default=False)
     residual_amount = fields.Monetary(string='Amount Overdue', copy=False,
                                       compute='find_for_invoice_approval', )
+    categ_id = fields.Many2many(related='partner_id.category_id',string="Tags")
+
 
     @api.depends('name')
     def _compute_production_count(self):

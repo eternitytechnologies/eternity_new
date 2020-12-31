@@ -19,6 +19,7 @@
                             attrs="{'invisible': [('type','!=','in_invoice')],
                            'required': [('type','=','in_invoice')]}"/>
                     <field name="region_id"/>
+                    <field name="categ_id" widget="many2many_tags" attrs="{'invisible':[('type','!=','out_invoice')]}"/>
                 </field>
                 <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
                     <field name="purchase_price_subtotal" invisible="1" groups="gts_account.group_gross_profit_on_invoice"/>
@@ -35,7 +36,7 @@
         </record>
 
         <record id="sale_invoice_form_inherit_view_form" model="ir.ui.view">
-            <field name="name">account.invoice.inherit.form.view.sale</field>
+            <field name="name">account.move.inherit.form.view.sale</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="sale.account_invoice_form"/>
             <field name="arch" type="xml">
@@ -45,6 +46,26 @@
             </field>
         </record>
 
+        <record id="view_account_invoice_filter_inherited" model="ir.ui.view">
+            <field name="name">account.invoice.filter.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="/search/field[@name='journal_id']" position="after">
+                    <field name="categ_id" />
+                </xpath>
+            </field>
+        </record>
+<!--        <record id="view_account_move_filter_inherited" model="ir.ui.view">-->
+<!--            <field name="name">account.move.filter.inherit</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_move_filter"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="/search/field[@name='journal_id']" position="after">-->
+<!--                    <field name="categ_id" attrs="{'invisible':[('type','!=','out_invoice')]}"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
         <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
             <field name="name">Invoices</field>
             <field name="res_model">account.move</field>

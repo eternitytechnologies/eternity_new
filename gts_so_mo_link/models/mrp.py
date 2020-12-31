@@ -11,7 +11,7 @@ class MRPProduction(models.Model):
     _inherit = "mrp.production"
 
     partner_id = fields.Many2one('res.partner', string='Customer')
-    untaxed_amount = fields.Float('Untaxed Amount')
+    untaxed_amount = fields.Float('Untaxed Amount',compute="_compute_untaxed_amount")
     client_order_ref = fields.Char('Order Reference/ PO')
     delivery_date = fields.Datetime('Delivery Date')
     lot_numbers_count = fields.Integer('Lot Count', compute="_compute_lot_numbers", default=0, copy=False)
@@ -26,7 +26,21 @@ class MRPProduction(models.Model):
                 if lines.lot_id.id:
                     rec.lot_numbers_count += 1
 
+<<<<<<< HEAD
 
+=======
+    @api.depends('name')
+    def _compute_untaxed_amount(self):
+        for rec in self:
+            if rec.name:
+               so_rel = self.env['sale.order'].search([('name','=',rec.origin)])
+               untaxed_amount = 0.0
+               for sales in so_rel:
+                   untaxed_amount += sales.amount_untaxed
+               rec.untaxed_amount = untaxed_amount
+            else:
+                rec.untaxed_amount = 0.0
+>>>>>>> eternity_prod
 
     def action_view_lot_numbers(self):
         action = self.env.ref('stock.action_production_lot_form').read()[0]
@@ -52,6 +66,21 @@ class MRPProduction(models.Model):
         return action
 
 
+    def open_produce_product(self):
+        for raw in self.move_raw_ids:
+            if raw.product_id.qty_available < raw.product_uom_qty:
+                raise UserError(_("Quantity on hand and quantity to consume does not match for the components !"))
+
+        res = super(MRPProduction, self).open_produce_product()
+        return  res
+
+
+    def button_mark_done(self):
+        for raw in self.move_raw_ids:
+            if raw.product_id.qty_available < raw.product_uom_qty:
+                raise UserError(_("Quantity on hand and quantity to consume does not match for the components !"))
+        res = super(MRPProduction, self).button_mark_done()
+        return res
 class TestCertificateMO(models.AbstractModel):
     _name = "report.gts_so_mo_link.report_mrp_test_certificate"
 

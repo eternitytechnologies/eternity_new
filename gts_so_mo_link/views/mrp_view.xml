@@ -13,6 +13,7 @@
                        attrs="{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}"/>
                 <field name="delivery_date"
                        attrs="{'readonly': [('state', 'in', ('process', 'to_close', 'done', 'cancel'))]}"/>
+                <field name="untaxed_amount" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='finished_move_line_ids']//tree//field[@name='state']" position="after">
                 <field name="attach_production_report" filename="attach_production_report_name" widget="download"/>
