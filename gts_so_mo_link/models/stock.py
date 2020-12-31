@@ -1,4 +1,4 @@
-from odoo import api, fields, models, exceptions, _
+from odoo import api, fields, tools, models, _
 import qrcode
 import base64
 from io import BytesIO
