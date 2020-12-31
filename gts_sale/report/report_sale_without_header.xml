@@ -382,20 +382,7 @@
         </xpath>
     </template>
 
-<!--    <template id="report_saleorder_document_inherited" inherit_id="sale.report_saleorder_document">-->
-<!--        <xpath expr="//div[hasclass('page')]/h2" position="replace">-->
-<!--            <h4 class="mt16">-->
-<!--                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">-->
-<!--                    <span t-if="doc.state not in ['draft','sent']">Order # </span>-->
-<!--                    <span t-if="doc.state in ['draft','sent']">Quotation # </span>-->
-<!--                </t>-->
-<!--                <t t-if="env.context.get('proforma', False) or is_pro_forma">-->
-<!--                    <span>Pro-Forma Invoice # </span>-->
-<!--                </t>-->
-<!--                <span t-field="doc.name"/>-->
-<!--            </h4>-->
-<!--        </xpath>-->
-<!--    </template>-->
+
 
     <template id="report_saleorder_without_hf_jar_document1" inherit_id="gts_sale.report_saleorder_document_inherited_jar1" primary="True">
         <xpath expr="//t[@t-call='report_custom_layout.external_layout_account_invoice_jar']" position="attributes">
@@ -416,6 +403,13 @@
                 <t t-call="gts_sale.report_saleorder_without_hf_jar_document1" t-lang="doc.partner_id.lang"/>
             </t>
         </t>
+    </template>
+
+    <template id="report_saleorder_document_inherited" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="style">font-size:12.5px</attribute>
+        </xpath>
+
     </template>
 
 </odoo>

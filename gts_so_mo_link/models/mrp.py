@@ -33,7 +33,10 @@ class MRPProduction(models.Model):
                so_rel = self.env['sale.order'].search([('name','=',rec.origin)])
                untaxed_amount = 0.0
                for sales in so_rel:
-                   untaxed_amount += sales.amount_untaxed
+                   for line in sales.order_line:
+                       if line.product_id == rec.product_id:
+                           untaxed_amount += line.price_subtotal
+
                rec.untaxed_amount = untaxed_amount
             else:
                 rec.untaxed_amount = 0.0
