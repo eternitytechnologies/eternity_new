@@ -12,4 +12,8 @@
         <field name="name">Gross Profit Access</field>
     </record>
 
+    <record id="show_sp_per_ah" model="res.groups">
+        <field name="name">Show SP per AH</field>
+    </record>
+
 </odoo>

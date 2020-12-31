@@ -94,6 +94,7 @@ class AccountInvoice(models.Model):
                              currency_field='currency_id', store=True)
     total_purchase_price = fields.Monetary(compute='_get_total_cost', string='Total Cost',
                                            currency_field='currency_id', store=True)
+    categ_id = fields.Many2many(related='partner_id.category_id',string="Tags")
 
     @api.depends('invoice_line_ids.purchase_price_subtotal')
     def _get_total_cost(self):

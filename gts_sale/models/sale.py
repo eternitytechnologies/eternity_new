@@ -94,6 +94,8 @@ class SaleOrder(models.Model):
         for order in self:
             if order.amount_untaxed != 0.0:
                 order.margin_percentage = (order.margin / order.amount_untaxed) * 100
+            else:
+                order.margin_percentage = 0.0
 
     @api.depends('order_line.purchase_price_subtotal')
     def _get_total_cost(self):

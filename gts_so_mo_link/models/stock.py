@@ -16,3 +16,11 @@ class StockPicking(models.Model):
                 if lines.lot_id and self.date_done:
                     lines.lot_id.delivery_date = self.date_done.strftime('%Y-%m-%d')
         return rec
+
+    def button_validate(self):
+        for move in self.move_ids_without_package:
+            if move.product_uom_qty > move.product_id.qty_available:
+                raise UserError(_("Trying to reserve quantities more than on hand quantity !"))
+
+        res = super(StockPicking, self).button_validate()
+        return res

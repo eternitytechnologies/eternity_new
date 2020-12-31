@@ -15,17 +15,29 @@
                     <field name="production_count" widget="statinfo" string="Manufacturing Order(s)"/>
                 </button>
             </xpath>
-             <xpath expr="//field[@name='origin']" position="after">
-                 <field name="residual_amount" invisible="1"/>
-             </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="residual_amount" invisible="1"/>
+            </xpath>
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="apply_invoice_approval" invisible="1"/>
                 <field name="sent_for_invoice_approval" invisible="1"/>
                 <field name="invoice_creation_approved" invisible="1"/>
                 <field name="invoice_created" invisible="1"/>
                 <field name="residual_amount" invisible="1"/>
+                <field name="categ_id" widget="many2many_tags"/>
             </xpath>
         </field>
     </record>
+    <record id="view_sales_order_filter_inherit" model="ir.ui.view">
+        <field name="name">sale.order.list.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="/search/field[@name='user_id']" position="after">
+                <field name="categ_id" />
+            </xpath>
+        </field>
+    </record>
+
 
 </odoo>
