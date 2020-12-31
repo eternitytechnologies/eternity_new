@@ -18,9 +18,10 @@ class StockPicking(models.Model):
         return rec
 
     def button_validate(self):
-        for move in self.move_ids_without_package:
-            if move.product_uom_qty > move.product_id.qty_available:
-                raise UserError(_("Trying to reserve quantities more than on hand quantity !"))
+        if self.picking_type_id.code == 'outgoing':
+            for move in self.move_ids_without_package:
+                if move.product_uom_qty > move.product_id.qty_available:
+                    raise UserError(_("Trying to reserve quantities more than on hand quantity !"))
 
         res = super(StockPicking, self).button_validate()
         return res

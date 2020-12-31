@@ -382,7 +382,7 @@
         </xpath>
     </template>
 
-    <template id="report_saleorder_without_hf_jar_document1" inherit_id="report_saleorder_document_inherited_jar1" primary="True">
+    <template id="report_saleorder_without_hf_jar_document1" inherit_id="gts_sale.report_saleorder_document_inherited_jar1" primary="True">
             <xpath expr="//t[@t-call='report_custom_layout.external_layout_account_invoice_jar']" position="attributes">
                 <attribute name="t-call">web.basic_layout</attribute>
             </xpath>
