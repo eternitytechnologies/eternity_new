@@ -912,4 +912,4 @@ class SaleOrder(models.Model):
                                             body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
                                             body_mrp_create + body_mrp_confirm + body_mrp_to_do
                     # template.send_mail(group_user.id,force_send=True)
-                    template.send_mail(self.id,force_send=True)
+                    template.send_mail(self.id,force_send=False)
