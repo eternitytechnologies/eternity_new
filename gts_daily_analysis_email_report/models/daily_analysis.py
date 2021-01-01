@@ -8,7 +8,7 @@ from babel.numbers import format_currency
 
 
 class SaleOrder(models.Model):
-    _inherit = "res.users"
+    _inherit = "sale.order"
 
     def scheduled_daily_analysis_report(self):
         dt = date.today()
@@ -911,4 +911,4 @@ class SaleOrder(models.Model):
                                             body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
                                             body_mrp_create + body_mrp_confirm + body_mrp_to_do
                     # template.send_mail(group_user.id,force_send=True)
-                    template.send()
+                    template.send_mail(self.id,force_send=True)
