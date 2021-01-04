@@ -11,7 +11,7 @@
         """,
     "license": "LGPL-3",
     "installable": True,
-    "depends": ['base', 'account', 'sale', 'crm', 'mrp', 'purchase'],
+    "depends": ['base', 'account', 'sale', 'crm', 'mrp', 'purchase','mail'],
     "data": [
         'security/security_view.xml',
         'views/daily_analysis.xml',
