@@ -26,9 +26,7 @@ class MRPProduction(models.Model):
                 if lines.lot_id.id:
                     rec.lot_numbers_count += 1
 
-<<<<<<< HEAD
 
-=======
     @api.depends('name')
     def _compute_untaxed_amount(self):
         for rec in self:
@@ -40,7 +38,6 @@ class MRPProduction(models.Model):
                rec.untaxed_amount = untaxed_amount
             else:
                 rec.untaxed_amount = 0.0
->>>>>>> eternity_prod
 
     def action_view_lot_numbers(self):
         action = self.env.ref('stock.action_production_lot_form').read()[0]
