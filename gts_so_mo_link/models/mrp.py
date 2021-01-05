@@ -34,7 +34,10 @@ class MRPProduction(models.Model):
                so_rel = self.env['sale.order'].search([('name','=',rec.origin)])
                untaxed_amount = 0.0
                for sales in so_rel:
-                   untaxed_amount += sales.amount_untaxed
+                   for line in sales.order_line:
+                       if line.product_id == rec.product_id:
+                           untaxed_amount += line.price_subtotal
+
                rec.untaxed_amount = untaxed_amount
             else:
                 rec.untaxed_amount = 0.0
@@ -63,21 +66,21 @@ class MRPProduction(models.Model):
         return action
 
 
-    def open_produce_product(self):
-        for raw in self.move_raw_ids:
-            if raw.product_id.qty_available < raw.product_uom_qty:
-                raise UserError(_("Quantity on hand and quantity to consume does not match for the components !"))
-
-        res = super(MRPProduction, self).open_produce_product()
-        return  res
-
-
-    def button_mark_done(self):
-        for raw in self.move_raw_ids:
-            if raw.product_id.qty_available < raw.product_uom_qty:
-                raise UserError(_("Quantity on hand and quantity to consume does not match for the components !"))
-        res = super(MRPProduction, self).button_mark_done()
-        return res
+    # def open_produce_product(self):
+    #     for raw in self.move_raw_ids:
+    #         if raw.product_id.qty_available < raw.product_uom_qty:
+    #             raise UserError(_("Quantity on hand and quantity to consume does not match for the components !"))
+    #
+    #     res = super(MRPProduction, self).open_produce_product()
+    #     return  res
+    #
+    #
+    # def button_mark_done(self):
+    #     for raw in self.move_raw_ids:
+    #         if raw.product_id.qty_available < raw.product_uom_qty:
+    #             raise UserError(_("Quantity on hand and quantity to consume does not match for the components !"))
+    #     res = super(MRPProduction, self).button_mark_done()
+    #     return res
 class TestCertificateMO(models.AbstractModel):
     _name = "report.gts_so_mo_link.report_mrp_test_certificate"
 

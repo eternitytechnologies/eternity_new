@@ -8,7 +8,7 @@ from babel.numbers import format_currency
 
 
 class SaleOrder(models.Model):
-    _inherit = "res.users"
+    _inherit = "sale.order"
 
     def scheduled_daily_analysis_report(self):
         dt = date.today()
@@ -62,6 +62,7 @@ class SaleOrder(models.Model):
 
         template = self.env.ref('gts_daily_analysis_email_report.email_template_daily_analysis_report')
         users_list = self.env['res.users'].search([])
+        mail = self.env['mail.mail']
         for group_user in users_list:
             if group_user.has_group('gts_daily_analysis_email_report.group_daily_analysis_report_access'):
 
@@ -904,10 +905,21 @@ class SaleOrder(models.Model):
                 # ------------------------ Template -------------------------
 
                 if template:
-                    template.email_from = "admin@eternitytechnologies.com"
+                    template.email_from = "odoo@eternitytechnologies.com"
                     template.email_to = group_user.login
                     template['body_html'] = body_opp_create + body_header_won + body_header_lost + body_quo_prepare \
                                             + body_sale_order + body_purchase_rfq + body_purchase_confirm + \
                                             body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
                                             body_mrp_create + body_mrp_confirm + body_mrp_to_do
-                    template.send_mail(group_user.id,force_send=True)
+
+                    # email_vals = {
+                    #     'email_from':"admin@eternitytechnologies.com",
+                    #     'email_to': group_user.login,
+                    #     'body_html' : body_opp_create + body_header_won + body_header_lost + body_quo_prepare \
+                    #                         + body_sale_order + body_purchase_rfq + body_purchase_confirm + \
+                    #                         body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
+                    #                         body_mrp_create + body_mrp_confirm + body_mrp_to_do
+                    # }
+                    template.send_mail(self.id,force_send=True)
+                    # mail.create(email_vals).send()
+                    # template.send_mail(self.id)

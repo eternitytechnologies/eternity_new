@@ -80,9 +80,9 @@
                             <div class="col-4">
                                 <strong>Buyer Inquiry Details</strong>
                                 <div>
-                                  <span class="m-0" t-field="doc.client_order_ref"/>
-                                  <t t-if="doc.client_order_ref and doc.x_studio_buyer_inquiry_date">, </t>
-                                  <span class="m-0" t-field="doc.x_studio_buyer_inquiry_date"/>
+                                    <span class="m-0" t-field="doc.client_order_ref"/>
+                                    <t t-if="doc.client_order_ref and doc.x_studio_buyer_inquiry_date">, </t>
+                                    <span class="m-0" t-field="doc.x_studio_buyer_inquiry_date"/>
                                 </div>
                             </div>
                         </div>
@@ -138,9 +138,9 @@
                             <div t-if="doc.state not in ['draft','sent','approved']" class="col-4">
                                 <strong>Buyer Order Detail</strong>
                                 <div>
-                                  <span class="m-0" t-field="doc.client_order_ref"/>
-                                  <t t-if="doc.client_order_ref and doc.x_studio_buyer_inquiry_date">, </t>
-                                  <span class="m-0" t-field="doc.x_studio_buyer_inquiry_date"/>
+                                    <span class="m-0" t-field="doc.client_order_ref"/>
+                                    <t t-if="doc.client_order_ref and doc.x_studio_buyer_inquiry_date">, </t>
+                                    <span class="m-0" t-field="doc.x_studio_buyer_inquiry_date"/>
                                 </div>
                             </div>
                             <div t-if="doc.validity_date and doc.state in ['draft','sent','approved']" class="col-4">
@@ -225,9 +225,9 @@
                                             <span t-esc="new_index"/>
                                         </td>
                                         <td>
-                                           <span t-field="line.name"/>
-                                          <!-- <span t-field="line.product_id"/> -->
-                                          <!--<span t-field="line.product_id.description_sale"/>-->
+                                            <span t-field="line.name"/>
+                                            <!-- <span t-field="line.product_id"/> -->
+                                            <!--<span t-field="line.product_id.description_sale"/>-->
                                         </td>
                                         <td name="td_hsn_code" class="text-center">
                                             <span t-field="line.product_id.l10n_in_hsn_code"/>
@@ -246,7 +246,7 @@
                                             <t t-foreach="line.get_tax_list()" t-as="tax_line">
                                                 <span t-esc="tax_line.description or tax_line.name"/><br/>
                                             </t>
-<!--                                            <span t-esc="'\n '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>-->
+                                            <!--                                            <span t-esc="'\n '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>-->
                                         </td>
                                         <td class="text-right o_price_total">
                                             <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
@@ -282,7 +282,7 @@
                     <div class="clearfix">
                         <div id="total" class="row" name="total">
                             <div class="col-8">
-                              <p t-raw="doc.note"/>
+                                <p t-raw="doc.note"/>
                             </div>
                             <div class="col-4">
                                 <table class="table table-sm">
@@ -331,28 +331,28 @@
 
                     <table class="mt32" width="100%" id="signature_block" style="page-break-inside: avoid;">
                         <t t-if="doc.x_with_signature">
-                      <tr class="text-center">
-                        <td style="border:hidden;" width="33%"/>
-                        <td style="border:hidden;" width="33%"/>
-                        <td style="background-color: white !important; border:hidden;">
-                            <strong>For <span t-field="doc.company_id"/></strong>
-                        </td>
-                      </tr>
-                      <tr class="text-center">
-                        <td style="border:hidden;">
-                          <!-- <div class="mt64"><strong>Prepared By</strong></div> -->
-                        </td>
-                        <td style="border:hidden;">
-                          <!-- <div class="mt64"><strong>Checked By</strong></div> -->
-                        </td>
-                        <td style="background-color: white !important;border:hidden;">
-                            <!--<t t-if="doc.x_with_signature">-->
-                                <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
-                                <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
-                            <!--</t>-->
-                          <div><strong>Authorized sign &amp; seal</strong></div>
-                        </td>
-                      </tr>
+                            <tr class="text-center">
+                                <td style="border:hidden;" width="33%"/>
+                                <td style="border:hidden;" width="33%"/>
+                                <td style="background-color: white !important; border:hidden;">
+                                    <strong>For <span t-field="doc.company_id"/></strong>
+                                </td>
+                            </tr>
+                            <tr class="text-center">
+                                <td style="border:hidden;">
+                                    <!-- <div class="mt64"><strong>Prepared By</strong></div> -->
+                                </td>
+                                <td style="border:hidden;">
+                                    <!-- <div class="mt64"><strong>Checked By</strong></div> -->
+                                </td>
+                                <td style="background-color: white !important;border:hidden;">
+                                    <!--<t t-if="doc.x_with_signature">-->
+                                    <img src="/report_custom_layout/static/src/img/seal.jpg" style="max-width: 130px;"/>
+                                    <img src="/report_custom_layout/static/src/img/signature.jpg" style="max-width: 130px;"/>
+                                    <!--</t>-->
+                                    <div><strong>Authorized sign &amp; seal</strong></div>
+                                </td>
+                            </tr>
                         </t>
                     </table>
 
@@ -382,14 +382,16 @@
         </xpath>
     </template>
 
-    <template id="report_saleorder_without_hf_jar_document1" inherit_id="report_saleorder_document_inherited_jar1" primary="True">
-            <xpath expr="//t[@t-call='report_custom_layout.external_layout_account_invoice_jar']" position="attributes">
-                <attribute name="t-call">web.basic_layout</attribute>
-            </xpath>
 
-            <xpath expr="//div[hasclass('page')]" position="attributes">
-                <attribute name="style">font-size: 12px;margin-left:5mm;margin-right:5mm;</attribute>
-            </xpath>
+
+    <template id="report_saleorder_without_hf_jar_document1" inherit_id="gts_sale.report_saleorder_document_inherited_jar1" primary="True">
+        <xpath expr="//t[@t-call='report_custom_layout.external_layout_account_invoice_jar']" position="attributes">
+            <attribute name="t-call">web.basic_layout</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="style">font-size: 12px;margin-left:5mm;margin-right:5mm;</attribute>
+        </xpath>
         <xpath expr="." position="attributes">
             <attribute name="t-name">gts_sale.report_saleorder_without_hf_jar_document1</attribute>
         </xpath>
@@ -401,6 +403,13 @@
                 <t t-call="gts_sale.report_saleorder_without_hf_jar_document1" t-lang="doc.partner_id.lang"/>
             </t>
         </t>
+    </template>
+
+    <template id="report_saleorder_document_inherited" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="style">font-size:12.5px</attribute>
+        </xpath>
+
     </template>
 
 </odoo>

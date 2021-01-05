@@ -1,4 +1,4 @@
-from odoo import api, fields, models, exceptions, _
+from odoo import api, fields, tools, models, _
 import qrcode
 import base64
 from io import BytesIO
@@ -17,10 +17,13 @@ class StockPicking(models.Model):
                     lines.lot_id.delivery_date = self.date_done.strftime('%Y-%m-%d')
         return rec
 
-    def button_validate(self):
-        for move in self.move_ids_without_package:
-            if move.product_uom_qty > move.product_id.qty_available:
-                raise UserError(_("Trying to reserve quantities more than on hand quantity !"))
+    # def button_validate(self):
+    #     if self.picking_type_id.code == 'outgoing':
+    #         for move in self.move_ids_without_package:
+    #             if move.product_uom_qty > move.product_id.qty_available:
+    #                 raise UserError(_("Trying to reserve quantities more than on hand quantity !"))
+    #
+    #     res = super(StockPicking, self).button_validate()
+    #     return res
 
-        res = super(StockPicking, self).button_validate()
-        return res
+
