@@ -72,7 +72,7 @@ class ImportQuantity(models.TransientModel):
                 else:
                     internal_ref = row[0]
                     name = row[1]
-                    if name and product.type not in ['consu','service']:
+                    if name :
                         external_id = str(row[8]).split("_")
                         id = external_id[6]
                         product = self.env['product.product'].search([('id', '=', id)])
