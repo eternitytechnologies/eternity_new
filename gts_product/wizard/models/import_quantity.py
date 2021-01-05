@@ -76,12 +76,12 @@ class ImportQuantity(models.TransientModel):
                         external_id = str(row[8]).split("_")
                         id = external_id[6]
                         product = self.env['product.product'].search([('id', '=', id)])
-                        quantity = float(row[5])
+                        quant = float(row[5])
                         if product.type not in ['consu','service']:
                             stock_quant.with_context(inventory_mode=True).create({
                                 'product_id': product.id,
                                 'location_id' : location.id,
-                                'inventory_quantity' : quantity,
+                                'inventory_quantity' : float(quant),
                             })
                             # product.qty_available = float(quantity)
 
