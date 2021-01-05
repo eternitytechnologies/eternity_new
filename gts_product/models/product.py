@@ -168,30 +168,30 @@ class ProductProduct(models.Model):
 
     # custom_standard_price = fields.Float(compute='set_cost',help="")
 
-    def set_cost(self):
-        products = self.env['product.product'].search([('type','!=','service'),('purchase_ok','=',True)])
-        company = self.env.company
-        for product in products:
-            tot_unit_price = 0.0
-            tot_qty = 0.0
-            bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', product.id),('move_id.invoice_origin','!=',False),
-                 ('move_id.state', '=', 'posted')])
-
-            po_ref = []
-            for bill in bills:
-                # value += bill.quantity * bill.price_unit
-                if bill.move_id.invoice_origin not in po_ref:
-                    po_ref.append(bill.move_id.invoice_origin)
-
-                tot_unit_price += bill.price_unit
-                tot_qty += bill.quantity
-            # if value != 0 or tot_qty != 0:
-            unit_cost = 0.0
-            if tot_unit_price != 0.0 and product.categ_id.property_cost_method == 'average':
-                # po_len = len(po_ref)
-                # unit_cost = value / tot_qty
-                unit_cost = tot_unit_price / tot_qty
-                product.standard_price = unit_cost
+    # def set_cost(self):
+    #     products = self.env['product.product'].search([('type','!=','service'),('purchase_ok','=',True)])
+    #     company = self.env.company
+    #     for product in products:
+    #         tot_unit_price = 0.0
+    #         tot_qty = 0.0
+    #         bills = self.env['account.move.line'].search([('move_id.type', '=', 'in_invoice'), ('product_id', '=', product.id),('move_id.invoice_origin','!=',False),
+    #              ('move_id.state', '=', 'posted')])
+    #
+    #         po_ref = []
+    #         for bill in bills:
+    #             # value += bill.quantity * bill.price_unit
+    #             if bill.move_id.invoice_origin not in po_ref:
+    #                 po_ref.append(bill.move_id.invoice_origin)
+    #
+    #             tot_unit_price += bill.price_unit
+    #             tot_qty += bill.quantity
+    #         # if value != 0 or tot_qty != 0:
+    #         unit_cost = 0.0
+    #         if tot_unit_price != 0.0 and product.categ_id.property_cost_method == 'average':
+    #             # po_len = len(po_ref)
+    #             # unit_cost = value / tot_qty
+    #             unit_cost = tot_unit_price / tot_qty
+    #             product.standard_price = unit_cost
                     # product.standard_price = unit_cost
             #     else:
             #         product.custom_standard_price = product.standard_price
