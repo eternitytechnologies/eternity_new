@@ -59,7 +59,7 @@ class ImportQuantity(models.TransientModel):
                             if len(lot) > 1 :
                                 lot_ref = self.env['stock.production.lot'].search([('name','=',lot),('product_id.id','=',product.id)])
                                 lot=''
-                                if lot_ref:
+                                if lot_ref and product.type not in ['consu','service']:
                                     stock_quant.with_context(inventory_mode=True).create({
                                         'product_id': product.id,
                                         'location_id':location.id,
@@ -72,15 +72,16 @@ class ImportQuantity(models.TransientModel):
                 else:
                     internal_ref = row[0]
                     name = row[1]
-                    if name:
+                    if name and product.type not in ['consu','service']:
                         external_id = str(row[8]).split("_")
                         id = external_id[6]
                         product = self.env['product.product'].search([('id', '=', id)])
                         quantity = float(row[5])
-                        stock_quant.with_context(inventory_mode=True).create({
-                            'product_id': product.id,
-                            'location_id' : location.id,
-                            'inventory_quantity' : quantity,
-                        })
-                        # product.qty_available = float(quantity)
+                        if product.type not in ['consu','service']:
+                            stock_quant.with_context(inventory_mode=True).create({
+                                'product_id': product.id,
+                                'location_id' : location.id,
+                                'inventory_quantity' : quantity,
+                            })
+                            # product.qty_available = float(quantity)
 
