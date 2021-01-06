@@ -24,8 +24,8 @@ class ImportQuantity(models.TransientModel):
         # warehouse = self.env['stock.warehouse'].search(
         #     [('company_id', '=', self.env.company.id)], limit=1
         # )
-        qty_index =[8,10,12,14,16,18]
-        lot_index =[9,11,13,15,17,19]
+        qty_index =[8]
+        lot_index =[]
         for row in lis:
             if row_num==0:
                 row_num+=1
@@ -48,10 +48,11 @@ class ImportQuantity(models.TransientModel):
                             if current_index in qty_index and current_index not in qty_index_visited:
                                 quant = col
                                 qty_index_visited.append(current_index)
-
+                                lot_index.append(current_index+1)
                             if current_index in lot_index and current_index not in lot_index_visited:
                                 lot = col
                                 lot_index_visited.append(current_index)
+                                qty_index.append(current_index+1)
 
                             current_index +=1
 
@@ -75,13 +76,25 @@ class ImportQuantity(models.TransientModel):
                     if name :
                         external_id = str(row[8]).split("_")
                         id = external_id[6]
-                        product = self.env['product.product'].search([('id', '=', id)])
                         quant = float(row[5])
-                        # if product.type not in ['consu','service']:
-                        #     stock_quant.with_context(inventory_mode=True).create({
-                        #         'product_id': product.id,
-                        #         'location_id' : location.id,
-                        #         'inventory_quantity' : float(quant),
-                        #     })
-                        product.qty_available = float(quant)
+
+                        product = self.env['product.product'].search([('id', '=', id)])
+                        if product and product.tracking != 'none':
+                            lot = self.env['stock.production.lot'].search([('name','=','stock_adjust'),('product_id.id','=',product.id)])
+                            if product.type not in ['consu','service']:
+                                stock_quant.with_context(inventory_mode=True).create({
+                                    'product_id': product.id,
+                                    'location_id' : location.id,
+                                    'lot_id': lot.id if lot else False,
+                                    'inventory_quantity' : float(quant),
+                                })
+                        else:
+                            if product and product.type not in ['consu','service']:
+                                stock_quant.with_context(inventory_mode=True).create({
+                                    'product_id': product.id,
+                                    'location_id' : location.id,
+                                    'lot_id': False,
+                                    'inventory_quantity' : float(quant),
+                                })
+                        # product.qty_available = float(quant)
 
