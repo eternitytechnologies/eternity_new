@@ -157,19 +157,12 @@ class StockPicking(models.Model):
             rec.sub_supply_type_domain = json.dumps(domain)
 
 
-    @api.onchange('generate_ewaybill','sub_supply_type_id')
+    @api.onchange('supply_type', 'sub_supply_type_id')
     def onchange_generate_ewaybill(self):
-        address = self.picking_type_id.warehouse_id.partner_id # warehouse
-        contact_address = self.partner_id #contact
+        address = self.picking_type_id.warehouse_id.partner_id  # warehouse
+        contact_address = self.partner_id  # contact
         sub_supply = self.sub_supply_type_id.name
-        if self.invoice_no and self.generate_ewaybill:
-            move = self.env['account.move'].search([('name','=',self.invoice_no)])
-            self.doc_date = move.invoice_date
-
-        if address and contact_address and 'OUT' in self.name:
-            self.supply_type = 'O'
-            self.document_type = 'INV'
-
+        if address and contact_address and (self.supply_type == 'O'):
             self.from_name = self.picking_type_id.warehouse_id.registered_name
             self.street = address.street
             self.street2 = address.street2
@@ -186,10 +179,7 @@ class StockPicking(models.Model):
             self.to_zip = contact_address.zip
             self.to_vat = contact_address.vat
 
-        if address and contact_address and 'IN' in self.name:
-            self.supply_type = 'I'
-            self.document_type = 'BIL'
-
+        if address and contact_address and self.supply_type == 'I':
             self.from_name = contact_address.name
             self.street = contact_address.street
             self.street2 = contact_address.street2
@@ -206,7 +196,7 @@ class StockPicking(models.Model):
             self.to_zip = address.zip
             self.to_vat = address.vat
 
-        if address and contact_address and 'OUT' in self.name and sub_supply == 'Export':
+        if address and contact_address and self.supply_type == 'O' and sub_supply == 'Export':
             self.from_name = ''
             self.street = address.street
             self.street2 = address.street2
@@ -223,7 +213,7 @@ class StockPicking(models.Model):
             self.to_zip = ''
             self.to_vat = 'URP'
 
-        if address and contact_address and 'IN' in self.name and sub_supply == 'Import':
+        if address and contact_address and self.supply_type == 'I' and sub_supply == 'Import':
             self.from_name = ''
             self.street = ''
             self.street2 = ''
@@ -239,8 +229,6 @@ class StockPicking(models.Model):
             self.to_state_id = address.state_id.id
             self.to_zip = address.zip
             self.to_vat = address.vat
-
-
 
     @api.onchange('transporter_id')
     def _onchange_transporter_id(self):
