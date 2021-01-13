@@ -28,7 +28,7 @@ class StockPicking(models.Model):
     supply_type = fields.Selection([('I', 'Inward'),
                                     ('O', 'Outward')], string="Supply Type", tracking=2)
     vehicle_type = fields.Selection([('R', 'Regular'),
-                                     ('O', 'ODC')], string="Vechicle Type", tracking=2)
+                                     ('O', 'ODC')], string="Vechicle Type", tracking=2,default='R')
     sub_supply_type = fields.Selection([('1', 'Supply'),
                                         ('2', 'Import'),
                                         ('3', 'Export'),
@@ -110,6 +110,10 @@ class StockPicking(models.Model):
                 pass
             else:
                 raise UserError(_("use only / and - as a special character"))
+        if self.invoice_no and self.generate_ewaybill:
+            move = self.env['account.move'].search([('name','=',self.invoice_no)])
+            self.doc_date = move.invoice_date
+
         # return True
 
     @api.constrains('doc_date')
@@ -155,8 +159,8 @@ class StockPicking(models.Model):
 
     @api.onchange('generate_ewaybill','sub_supply_type_id')
     def onchange_generate_ewaybill(self):
-        address = self.picking_type_id.warehouse_id.partner_id # warehouse
-        contact_address = self.partner_id #contact
+        address = self.picking_type_id.warehouse_id.partner_id  # warehouse
+        contact_address = self.partner_id  # contact
         sub_supply = self.sub_supply_type_id.name
         for move in self.move_ids_without_package:
             move_line = self.env['account.move.line'].search([('invoice_origin','=',self.origin),('product_id.id','=',move.product_id.id),
