@@ -163,7 +163,7 @@ class StockPicking(models.Model):
         contact_address = self.partner_id  # contact
         sub_supply = self.sub_supply_type_id.name
         for move in self.move_ids_without_package:
-            move_line = self.env['account.move.line'].search([('invoice_id.invoice_origin','=',self.origin),('product_id.id','=',move.product_id.id),
+            move_line = self.env['account.move.line'].search([('move_id.invoice_origin','=',self.origin),('product_id.id','=',move.product_id.id),
             ('quantity','=',move.quantity_done)])
             self.invoice_no = move_line.invoice_id.name
 
