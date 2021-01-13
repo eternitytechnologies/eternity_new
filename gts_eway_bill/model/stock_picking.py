@@ -101,6 +101,7 @@ class StockPicking(models.Model):
     sub_supply_type_domain = fields.Char(compute="_compute_sub_supply_type_id_domain", readonly=True, store=False)
     sub_supply_type_code = fields.Char('Sub Supply Type Code', related='sub_supply_type_id.code', readonly=True)
 
+
     @api.onchange('invoice_no')
     def validation_invoice_no(self):
         if self.invoice_no:
@@ -339,6 +340,7 @@ class StockPicking(models.Model):
             raise UserError(_('Please Please enter invoice number'))
         warehouse_details = self.picking_type_id.warehouse_id
         amount_untaxed = 0
+        other_value = 0
         order_dic = {
             'supplyType': self.supply_type,
             'subSupplyType': self.sub_supply_type_id.code,
@@ -441,14 +443,18 @@ class StockPicking(models.Model):
                     'taxableAmount': line.product_price * line.quantity_done,
                 })
                 amount_untaxed += line.product_price * line.quantity_done
+
+                other_value += line.other_amount
                 line_data.append(line_dic)
+
+
         order_dic.update({
             'itemList': line_data,
             'cgstValue': total_cgst,
             'sgstValue': total_sgst,
             'igstValue': total_igst,
             'totalValue': amount_untaxed,
-            'otherValue': 0,
+            'otherValue': other_value,
             'cessValue': total_cess,
             'cessNonAdvolValue': total_cess_non_advol,
             'totInvValue': amount_untaxed + total_cgst + total_sgst + total_igst + total_cess +

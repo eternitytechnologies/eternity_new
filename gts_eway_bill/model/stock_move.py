@@ -16,6 +16,8 @@ class StockMove(models.Model):
                                        ('2747', '2747'), ('3668', '3668'), ('4006', '4006'),
                                        ('4170', '4170')], string='CESS Non Advol Amount')
 
+    other_amount = fields.Float("Other Amount")
+
     @api.onchange('product_id', 'picking_type_id')
     def onchange_product(self):
         res = super(StockMove, self).onchange_product()
