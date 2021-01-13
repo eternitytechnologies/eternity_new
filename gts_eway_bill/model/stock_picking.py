@@ -165,7 +165,7 @@ class StockPicking(models.Model):
         for move in self.move_ids_without_package:
             move_line = self.env['account.move.line'].search([('move_id.invoice_origin','=',self.origin),('product_id.id','=',move.product_id.id),
             ('quantity','=',move.quantity_done)])
-            self.invoice_no = move_line.invoice_id.name
+            self.invoice_no = move_line.move_id.name
 
         if self.invoice_no and self.generate_ewaybill:
             move = self.env['account.move'].search([('name','=',self.invoice_no)])
