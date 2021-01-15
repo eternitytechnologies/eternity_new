@@ -911,6 +911,7 @@ class SaleOrder(models.Model):
                                             + body_sale_order + body_purchase_rfq + body_purchase_confirm + \
                                             body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
                                             body_mrp_create + body_mrp_confirm + body_mrp_to_do
+                    template['email_cc'] = 'milind.deshpande@eternitytechnologies.com'
 
                     # email_vals = {
                     #     'email_from':"admin@eternitytechnologies.com",
@@ -920,6 +921,6 @@ class SaleOrder(models.Model):
                     #                         body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
                     #                         body_mrp_create + body_mrp_confirm + body_mrp_to_do
                     # }
-                    template.send_mail(self.id,force_send=True)
+                    template.send_mail(self.id,force_send=False)
                     # mail.create(email_vals).send()
                     # template.send_mail(self.id)
