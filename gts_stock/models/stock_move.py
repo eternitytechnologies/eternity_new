@@ -113,9 +113,11 @@ class StockMove(models.Model):
     lot_with_qty_reserved = fields.Text("Lot With Quantity", copy=False)
     location_dest_id = fields.Many2one(
         'stock.location', 'Destination Location',
-        auto_join=True, index=True, required=False,
-        check_company=True,
+        required=False,
         help="Location where the system will stock the finished products.")
+    location_id = fields.Many2one(
+        'stock.location', 'Source Location',required=False,
+        help="Sets a location if you produce at a fixed location. This can be a partner location if you subcontract the manufacturing operations.")
 
     def _action_assign(self):
         res = super(StockMove, self)._action_assign()
