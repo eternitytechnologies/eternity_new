@@ -29,6 +29,9 @@ class StockLocation(models.Model):
             return True
         return False
 
+    def should_bypass_reservation(self):
+        # self.ensure_one()
+        return self.usage in ('supplier', 'customer', 'inventory', 'production') or self.scrap_location
 
     # def button_validate(self):
     #     if self.picking_type_id.code == 'outgoing':
