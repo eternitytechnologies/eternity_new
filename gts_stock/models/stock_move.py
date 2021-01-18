@@ -140,8 +140,8 @@ class StockMove(models.Model):
 class StockMoveLine(models.Model):
     _inherit = 'stock.move.line'
 
-    location_id = fields.Many2one('stock.location', 'From', check_company=True, required=False)
-    location_dest_id = fields.Many2one('stock.location', 'To', check_company=True, required=False)
+    location_id = fields.Many2one('stock.location', 'From',required=False)
+    location_dest_id = fields.Many2one('stock.location', 'To',required=False)
 
 
 
