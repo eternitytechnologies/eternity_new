@@ -137,6 +137,14 @@ class StockMove(models.Model):
                 move.lot_with_qty = lot_with_qty
         return res
 
+class StockMoveLine(models.Model):
+    _inherit = 'stock.move.line'
+
+    location_id = fields.Many2one('stock.location', 'From', check_company=True, required=False)
+    location_dest_id = fields.Many2one('stock.location', 'To', check_company=True, required=False)
+
+
+
 
 class UomUom(models.Model):
     _inherit = 'uom.uom'
