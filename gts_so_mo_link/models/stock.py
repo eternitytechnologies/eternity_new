@@ -20,19 +20,6 @@ class StockLocation(models.Model):
     _inherit = 'stock.location'
 
 
-    def _should_be_valued(self):
-        """ This method returns a boolean reflecting whether the products stored in `self` should
-        be considered when valuating the stock of a company.
-        """
-        # self.ensure_one()
-        if self.usage == 'internal' or (self.usage == 'transit' and self.company_id):
-            return True
-        return False
-
-    def should_bypass_reservation(self):
-        # self.ensure_one()
-        return self.usage in ('supplier', 'customer', 'inventory', 'production') or self.scrap_location
-
     # def button_validate(self):
     #     if self.picking_type_id.code == 'outgoing':
     #         for move in self.move_ids_without_package:

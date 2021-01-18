@@ -9,18 +9,6 @@ from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
-    def set_location_id(self):
-        res = self.env['stock.location'].search([('id', '=', 12)])
-        return res
-
-    location_id = fields.Many2one(
-        'stock.location', 'Location',
-        domain=lambda self: self._domain_location_id(),default=set_location_id,
-        auto_join=True, ondelete='restrict', readonly=True, required=False, index=True, check_company=True)
-
-
-
-
     @api.model
     def _update_reserved_quantity(self, product_id, location_id, quantity, lot_id=None, package_id=None, owner_id=None,
                                   strict=False):

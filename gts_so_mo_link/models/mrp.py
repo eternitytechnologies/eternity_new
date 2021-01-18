@@ -18,11 +18,11 @@ class MRPProduction(models.Model):
     test_certificate_count = fields.Integer('Lot Count', compute="_compute_test_certificates", default=0, copy=False)
     test_report_ids = fields.One2many('test.report.mo', 'production_id', string='Test Certificate Lines')
 
-    def action_assign(self):
-        self._cr.execute("ALTER TABLE stock_move_line alter column location_dest_id drop not null")
-        self._cr.execute("ALTER TABLE stock_move_line alter column location_id drop not null")
-        res = super(MRPProduction, self).action_assign()
-        return  res
+    # def action_assign(self):
+    #     self._cr.execute("ALTER TABLE stock_move_line alter column location_dest_id drop not null")
+    #     self._cr.execute("ALTER TABLE stock_move_line alter column location_id drop not null")
+    #     res = super(MRPProduction, self).action_assign()
+    #     return  res
 
     @api.depends('finished_move_line_ids', 'finished_move_line_ids.lot_id')
     def _compute_lot_numbers(self):
