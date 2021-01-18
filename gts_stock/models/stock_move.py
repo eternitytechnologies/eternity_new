@@ -112,6 +112,12 @@ class StockMove(models.Model):
     lot_with_qty = fields.Char("Lot With Quantity", copy=False)
     lot_with_qty_reserved = fields.Text("Lot With Quantity", copy=False)
 
+    location_dest_id = fields.Many2one(
+        'stock.location', 'Destination Location',
+        auto_join=True, index=True, required=False,
+        check_company=True,
+        help="Location where the system will stock the finished products.")
+
     def _action_assign(self):
         res = super(StockMove, self)._action_assign()
         for move in self.filtered(lambda x: x.production_id or x.raw_material_production_id):

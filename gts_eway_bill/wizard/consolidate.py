@@ -1,7 +1,7 @@
 
 from odoo import api, models, fields, _
 from odoo.exceptions import UserError
-
+from datetime import datetime, date
 import json
 from datetime import datetime
 
@@ -26,14 +26,16 @@ class UpdatevehicleNO(models.Model):
     def generate_bill(self):
         order_list = []
         line_data = []
-        time2 = datetime.strptime(self.transportation_doc_date, "%Y-%m-%d")
+        # time2 = datetime.strptime(self.transportation_doc_date, "%Y-%m-%d")
+        time2 = date.strftime(self.transportation_doc_date,"%Y-%m-%d")
         consolidate_dic = {
             'fromPlace': self.city,
             'fromState': self.state_id.port_code,
             'vehicleNo': self.vehicle_no,
             'transMode': self.transportation_mode,
             'transDocN': self.trans_id,
-            'transDocDate': time2.strftime('%d/%m/%Y')
+            # 'transDocDate': time2.strftime('%d/%m/%Y')
+            'transDocDate': time2
         }
         for line in self.ewaybills_order_ids:
             line_dic = {
