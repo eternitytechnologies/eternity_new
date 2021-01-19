@@ -40,7 +40,7 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-    <menuitem id="menu_consol_bill" name="Ptiny E-way"
-            parent="account.menu_finance_payables"
-            action="action_view_consolidate" sequence="201"/>
+<!--    <menuitem id="menu_consol_bill" name="Print E-way"-->
+<!--            parent="account.menu_finance_payables"-->
+<!--            action="action_view_consolidate" sequence="201"/>-->
 </odoo>
