@@ -7,12 +7,12 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
-<!--                <xpath expr="//button[2]" position="after">-->
-<!--                    <button string="Update Temporary fields" name="update_temp_fields"-->
-<!--                            type="object" class="btn btn-secondary" groups="base.group_no_one"/>-->
-<!--                    <button string="Create Variants" name="create_variant"-->
-<!--                            type="object" class="btn btn-secondary" groups="base.group_no_one"/>-->
-<!--                </xpath>-->
+                <!--                <xpath expr="//button[2]" position="after">-->
+                <!--                    <button string="Update Temporary fields" name="update_temp_fields"-->
+                <!--                            type="object" class="btn btn-secondary" groups="base.group_no_one"/>-->
+                <!--                    <button string="Create Variants" name="create_variant"-->
+                <!--                            type="object" class="btn btn-secondary" groups="base.group_no_one"/>-->
+                <!--                </xpath>-->
                 <xpath expr="//field[@name='barcode']" position="after">
                     <field name="have_design"/>
                     <field name="attach_design_pdf" filename="attach_design_pdf_filename"
@@ -27,12 +27,12 @@
                     <field name="calculate_ah"/>
                     <field name="volts"
                            attrs="{'invisible': ['|',('calculate_ah', '=', False),('product_type', '=', 'cell')], 'required': [('calculate_ah', '=', True)]}"/>
-<!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
+                    <!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
                     <field name="ah"
                            attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
                     <field name="battery_weight" attrs="{'invisible': [('product_type', '!=', 'battery')]}"/>
-<!--                    <field name="standard_price_temp" groups="base.group_no_one"/>-->
-<!--                    <field name="default_code_temp" groups="base.group_no_one"/>-->
+                    <!--                    <field name="standard_price_temp" groups="base.group_no_one"/>-->
+                    <!--                    <field name="default_code_temp" groups="base.group_no_one"/>-->
                 </field>
             </field>
         </record>
@@ -57,13 +57,13 @@
                     <field name="calculate_ah"/>
                     <field name="volts"
                            attrs="{'invisible': ['|',('calculate_ah', '=', False),('product_type', '=', 'cell')], 'required': [('calculate_ah', '=', True)]}"/>
-<!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
+                    <!--                    <field name="ah" attrs="{'invisible': ['|',('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>-->
                     <field name="ah" attrs="{'invisible': [('calculate_ah', '=', False)], 'required': [('product_type', '=','battery'),('calculate_ah', '=', True)]}"/>
                     <field name="battery_weight" attrs="{'invisible': [('product_type', '!=', 'battery')]}"/>
                 </field>
-<!--                <xpath expr="//field[@name='standard_price']" position="after">-->
-<!--                    <field name="custom_standard_price" invisible="1"/>-->
-<!--                </xpath>-->
+                <!--                <xpath expr="//field[@name='standard_price']" position="after">-->
+                <!--                    <field name="custom_standard_price" invisible="1"/>-->
+                <!--                </xpath>-->
             </field>
         </record>
 
@@ -76,6 +76,21 @@
                     <field name="l10n_in_hsn_code" required="1"/>
                     <field name="l10n_in_hsn_description"/>
                 </field>
+
+                <xpath expr="/form/sheet//group[@name='group_lots_and_weight']" position="replace">
+                    <group name="group_lots_and_weight" string="Logistics" attrs="{'invisible': [('type', 'not in', ['product', 'consu'])]}">
+                        <label for="weight" />
+                        <div class="o_row" name="weight" >
+                            <field name="weight"/>
+                            <span><field name="weight_uom_name"/></span>
+                        </div>
+                        <label for="volume" attrs="{'invisible':[('product_variant_count', '>', 1)]}"/>
+                        <div class="o_row" name="volume" attrs="{'invisible':[('product_variant_count', '>', 1)]}">
+                            <field name="volume" string="Volume"/>
+                            <span><field name="volume_uom_name"/></span>
+                        </div>
+                    </group>
+                </xpath>
             </field>
         </record>
 
