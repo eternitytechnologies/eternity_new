@@ -3,8 +3,8 @@
         <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="production">
                 <div class="page">
-                    <div class="row mb16">
-                        <div class="col-15">
+                    <div class="row" style="line-height:3pt;">
+                        <div class="col-15" style="font-size: 10px;">
                             <t t-set="cell_type" t-value=""/>
                             <t t-foreach="production.move_raw_ids" t-as="comp">
                                 <t t-if="comp.product_id.product_type=='cell' and comp.product_uom_qty > 0 and not cell_type">
@@ -14,24 +14,24 @@
                             <t t-foreach="serial_nos" t-as="sr_no">
                                 <table class="table border-top-0 border-right-0 border-left-0 border-bottom-0">
                                     <tr>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <b>Customer</b>
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" >
                                             :
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="60%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="50%">
                                             <b><t t-esc="production.partner_id.name"/></b>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <b>Battery Sr. No.</b>
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="5%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" >
                                             :
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="60%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <!--                                            <t t-foreach="serial_nos" t-as="sr_no">-->
                                             <!--                                                <t t-if="sr_no">-->
                                             <b><t t-esc="sr_no"/></b>
@@ -41,36 +41,36 @@
                                     </tr>
 
                                     <tr>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="40%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="50%">
                                             <b>Battery Type</b>
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
                                             :
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="60%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <b><t t-esc="production.product_id.volts"/>V <t t-esc="production.product_id.ah"/>AH</b>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <b>Cell Type</b>
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
                                             :
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="60%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <b> <span t-esc="cell_type"/> </b>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="40%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="50%">
                                             <b>Invoice Reference</b>
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" width="5%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0">
                                             :
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="60%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="50%">
                                             <t t-if="inv_ref">
                                                 <b> <span t-esc="inv_ref"/> </b>
                                             </t>
@@ -80,13 +80,13 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="40%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="50%">
                                             <b>Warranty Period</b>
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="5%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0" >
                                             :
                                         </td>
-                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="60%">
+                                        <td class="border-top-0 border-right-0 border-left-0 border-bottom-0"  width="50%">
                                             <b><span t-esc="warranty"/></b>
                                         </td>
                                     </tr>

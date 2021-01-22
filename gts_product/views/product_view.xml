@@ -80,7 +80,7 @@
                 <xpath expr="/form/sheet//group[@name='group_lots_and_weight']" position="replace">
                     <group name="group_lots_and_weight" string="Logistics" attrs="{'invisible': [('type', 'not in', ['product', 'consu'])]}">
                         <label for="weight" />
-                        <div class="o_row" name="weight" >
+                        <div class="o_row" name="weight">
                             <field name="weight"/>
                             <span><field name="weight_uom_name"/></span>
                         </div>
