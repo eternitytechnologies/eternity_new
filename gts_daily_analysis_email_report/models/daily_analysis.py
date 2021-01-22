@@ -907,6 +907,7 @@ class SaleOrder(models.Model):
                 if template:
                     template.email_from = "odoo@eternitytechnologies.com"
                     template.email_to = group_user.login
+                    template['email_cc'] = 'milind.deshpande@eternitytechnologies.com'
                     template['body_html'] = body_opp_create + body_header_won + body_header_lost + body_quo_prepare \
                                             + body_sale_order + body_purchase_rfq + body_purchase_confirm + \
                                             body_inv_create + body_payment_create + body_ven_bill + body_ven_payment + \
