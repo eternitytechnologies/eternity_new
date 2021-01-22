@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-<<<<<<< HEAD
     <record id="paperformat_custom_qrcode" model="report.paperformat">
         <field name="name">Custom Paperformat QR Code</field>
         <field name="default" eval="True"/>
@@ -143,7 +142,6 @@
             <t t-set="header_class" t-value="'header'"/>
             <t t-set="footer_class" t-value="'footer o_standard_footer'"/>
         </t>
-=======
         <record id="paperformat_custom_qrcode" model="report.paperformat">
             <field name="name">Custom Paperformat QR Code</field>
             <field name="default" eval="True"/>
@@ -269,7 +267,6 @@
                 <t t-set="header_class" t-value="'header'"/>
                 <t t-set="footer_class" t-value="'footer o_standard_footer'"/>
             </t>
->>>>>>> eternity_prod
 
         <div t-att-class="header_class" style="border-bottom: hidden;">
             <table width="120%" style="margin-left:-5mm;">
