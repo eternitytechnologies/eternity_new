@@ -13,7 +13,7 @@
         'security/security_view.xml',
         'views/product_view.xml',
         'views/restrict_product_create.xml',
-        'views/cost_cron.xml',
+        # 'views/cost_cron.xml',
         'template/email_template.xml',
         'wizard/views/import_quantity.xml'
     ],
