@@ -28,7 +28,7 @@
         'reports/label_report.xml',
         'reports/warranty_card.xml',
         'reports/report_bom_mrp.xml',
-        'wizard/views/update_mo.xml'
+        # 'wizard/views/update_mo.xml'
     ],
     'license': 'OPL-1',
     'installable': True,
