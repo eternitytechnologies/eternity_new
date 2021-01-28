@@ -31,4 +31,4 @@ class UpdateMO(models.TransientModel):
                 row_num+=1
             else:
                 mo = self.env['mrp.production'].search([('name','=',row[1])])
-                mo.state='cancel'
+                mo.state='done'
