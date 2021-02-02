@@ -73,7 +73,7 @@
         <field name="page_height">50</field>
         <field name="page_width">100</field>
         <field name="orientation">Portrait</field>
-<!--        <field name="orientation">Landscape</field>-->
+        <!--        <field name="orientation">Landscape</field>-->
         <field name="margin_top">0</field>
         <field name="margin_bottom">0</field>
         <field name="margin_left">2</field>
@@ -158,25 +158,25 @@
             <field name="dpi">102</field>
         </record>
 
-<!--        <record id="paperformat_custom_label" model="report.paperformat">-->
-<!--            <field name="name">Custom Paperformat Label</field>-->
-<!--            <field name="default" eval="True"/>-->
-<!--            <field name="format">custom</field>-->
-<!--            <field name="page_height">50</field>-->
-<!--            <field name="page_width">50</field>-->
-<!--            <field name="orientation">Portrait</field>-->
-<!--            <field name="margin_top">10</field>-->
-<!--            <field name="margin_bottom">0</field>-->
-<!--            <field name="margin_left">25</field>-->
-<!--            <field name="margin_right">25</field>-->
-<!--            <field name="header_line" eval="False"/>-->
-<!--            <field name="header_spacing">165</field>-->
-<!--            <field name="dpi">105</field>-->
-<!--        </record>-->
+        <!--        <record id="paperformat_custom_label" model="report.paperformat">-->
+        <!--            <field name="name">Custom Paperformat Label</field>-->
+        <!--            <field name="default" eval="True"/>-->
+        <!--            <field name="format">custom</field>-->
+        <!--            <field name="page_height">50</field>-->
+        <!--            <field name="page_width">50</field>-->
+        <!--            <field name="orientation">Portrait</field>-->
+        <!--            <field name="margin_top">10</field>-->
+        <!--            <field name="margin_bottom">0</field>-->
+        <!--            <field name="margin_left">25</field>-->
+        <!--            <field name="margin_right">25</field>-->
+        <!--            <field name="header_line" eval="False"/>-->
+        <!--            <field name="header_spacing">165</field>-->
+        <!--            <field name="dpi">105</field>-->
+        <!--        </record>-->
 
 
 
-       <record id="paperformat_custom_label" model="report.paperformat">
+        <record id="paperformat_custom_label" model="report.paperformat">
             <field name="name">Custom Paperformat Label</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
@@ -241,32 +241,32 @@
             <field name="header_spacing">30</field>
             <field name="dpi">90</field>
         </record>
+    </template>
+    <template id="external_layout_standard_account_invoice_jar">
+        <t t-set="article_class" t-value=""/>
+        <t t-set="header_class" t-value=""/>
+        <t t-set="footer_class" t-value=""/>
 
-        <template id="external_layout_standard_account_invoice_jar">
-            <t t-set="article_class" t-value=""/>
-            <t t-set="header_class" t-value=""/>
-            <t t-set="footer_class" t-value=""/>
-
-            <t t-if="company.external_report_layout_id and 'boxed' in company.external_report_layout_id.key">
-                <t t-set="article_class" t-value="'article o_report_layout_boxed'"/>
-                <t t-set="header_class" t-value="'header o_boxed_header'"/>
-                <t t-set="footer_class" t-value="'footer o_boxed_footer'"/>
-            </t>
-            <t t-if="company.external_report_layout_id and 'background' in company.external_report_layout_id.key">
-                <t t-set="article_class" t-value="'article o_report_layout_background'"/>
-                <t t-set="header_class" t-value="'header o_background_header'"/>
-                <t t-set="footer_class" t-value="'footer o_background_footer'"/>
-            </t>
-            <t t-if="not company.external_report_layout_id or 'clean' in company.external_report_layout_id.key">
-                <t t-set="article_class" t-value="'article o_report_layout_clean'"/>
-                <t t-set="header_class" t-value="'header o_clean_header'"/>
-                <t t-set="footer_class" t-value="'footer o_clean_footer'"/>
-            </t>
-            <t t-if="not company.external_report_layout_id or 'standard' in company.external_report_layout_id.key">
-                <t t-set="article_class" t-value="'article o_report_layout_standard'"/>
-                <t t-set="header_class" t-value="'header'"/>
-                <t t-set="footer_class" t-value="'footer o_standard_footer'"/>
-            </t>
+        <t t-if="company.external_report_layout_id and 'boxed' in company.external_report_layout_id.key">
+            <t t-set="article_class" t-value="'article o_report_layout_boxed'"/>
+            <t t-set="header_class" t-value="'header o_boxed_header'"/>
+            <t t-set="footer_class" t-value="'footer o_boxed_footer'"/>
+        </t>
+        <t t-if="company.external_report_layout_id and 'background' in company.external_report_layout_id.key">
+            <t t-set="article_class" t-value="'article o_report_layout_background'"/>
+            <t t-set="header_class" t-value="'header o_background_header'"/>
+            <t t-set="footer_class" t-value="'footer o_background_footer'"/>
+        </t>
+        <t t-if="not company.external_report_layout_id or 'clean' in company.external_report_layout_id.key">
+            <t t-set="article_class" t-value="'article o_report_layout_clean'"/>
+            <t t-set="header_class" t-value="'header o_clean_header'"/>
+            <t t-set="footer_class" t-value="'footer o_clean_footer'"/>
+        </t>
+        <t t-if="not company.external_report_layout_id or 'standard' in company.external_report_layout_id.key">
+            <t t-set="article_class" t-value="'article o_report_layout_standard'"/>
+            <t t-set="header_class" t-value="'header'"/>
+            <t t-set="footer_class" t-value="'footer o_standard_footer'"/>
+        </t>
 
         <div t-att-class="header_class" style="border-bottom: hidden;">
             <table width="120%" style="margin-left:-5mm;">
