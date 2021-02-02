@@ -3,8 +3,8 @@
         <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="production">
                 <div class="page">
-<!--                    <div class="row" style="line-height:3pt;">-->
-                    <div class="row" >
+                    <div class="row" style="line-height:3pt;">
+<!--                    <div class="row" >-->
 <!--                        <div class="col-15" style="font-size: 10px;">-->
                         <div class="col-15" >
                             <t t-set="cell_type" t-value=""/>
