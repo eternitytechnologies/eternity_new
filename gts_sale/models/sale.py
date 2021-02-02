@@ -37,7 +37,7 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
     po_number = fields.Char('PO Number', copy=False)
-    po_attachment = fields.Binary('Attach PO', compute='_attachment_name', inverse='_set_filename', copy=False)
+    po_attachment = fields.Binary('Attach PO', compute='_attachment_name', inverse='_set_filename', copy=False,store=True)
     po_value = fields.Float('PO Amount', copy=False)
     attached_file_name = fields.Char('File Name', copy=False)
     attachment_id = fields.Many2one('ir.attachment')

@@ -32,7 +32,6 @@ class MRPProduction(models.Model):
                 if lines.lot_id.id:
                     rec.lot_numbers_count += 1
 
-
     @api.depends('name')
     def _compute_untaxed_amount(self):
         for rec in self:

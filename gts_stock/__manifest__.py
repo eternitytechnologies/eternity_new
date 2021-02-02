@@ -20,6 +20,7 @@
         'views/stock_move_view.xml',
         'views/warranty_view.xml',
         'views/warranty.xml',
+        'wizard/update_product_variant.xml',
     ],
     'installable': True,
     'application': True,
