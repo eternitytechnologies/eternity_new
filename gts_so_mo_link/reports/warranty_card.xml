@@ -5,7 +5,7 @@
                 <div class="page">
 <!--                    <div class="row" style="line-height:4pt;">-->
                     <div class="row" >
-                        <div class="col-15" style="font-size: 12px;">
+                        <div class="col-15" style="font-size: 13px;">
 <!--                        <div class="col-15" >-->
                             <t t-set="cell_type" t-value=""/>
                             <t t-foreach="production.move_raw_ids" t-as="comp">
