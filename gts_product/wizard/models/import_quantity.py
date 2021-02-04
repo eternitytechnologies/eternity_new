@@ -24,8 +24,8 @@ class ImportQuantity(models.TransientModel):
         # warehouse = self.env['stock.warehouse'].search(
         #     [('company_id', '=', self.env.company.id)], limit=1
         # )
-        qty_index =[8]
-        lot_index =[]
+        qty_index =[]
+        lot_index =[2]
         for row in lis:
             if row_num==0:
                 row_num+=1
@@ -35,24 +35,26 @@ class ImportQuantity(models.TransientModel):
                     name = row[1]
                     qty_index_visited = []
                     lot_index_visited = []
-                    current_index = 8
+                    current_index = 2
                     # lot_current_index = 6
 
                     if name:
-                        external_id = str(row[7]).split("_")
+                        external_id = str(row[0]).split("_")
                         id = external_id[6]
                         product = self.env['product.product'].search([('id', '=', id)])
                         lot = ''
                         quant = 0.0
-                        for col in row[8:]:
-                            if current_index in qty_index and current_index not in qty_index_visited:
-                                quant = col
-                                qty_index_visited.append(current_index)
-                                lot_index.append(current_index+1)
+                        for col in row[2:]:
                             if current_index in lot_index and current_index not in lot_index_visited:
                                 lot = col
                                 lot_index_visited.append(current_index)
                                 qty_index.append(current_index+1)
+
+                            if current_index in qty_index and current_index not in qty_index_visited:
+                                quant = col
+                                qty_index_visited.append(current_index)
+                                lot_index.append(current_index+1)
+
 
                             current_index +=1
 
