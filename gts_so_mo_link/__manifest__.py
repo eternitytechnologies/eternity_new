@@ -11,7 +11,7 @@
     'sequence': 1,
     'author': 'Geo Technosoft',
     'website': 'https://www.geotechnosoft.com',
-    'depends': ['sale', 'mail', 'mrp_account', 'stock', 'mrp','report_custom_layout'],
+    'depends': ['sale', 'mail', 'mrp_account', 'stock', 'mrp','report_custom_layout','account'],
     'data': [
         'security/ir.model.access.csv',
         'security/security_view.xml',
@@ -28,7 +28,8 @@
         'reports/label_report.xml',
         'reports/warranty_card.xml',
         'reports/report_bom_mrp.xml',
-        'wizard/views/update_mo.xml'
+        'wizard/views/update_mo.xml',
+        'views/move_view.xml'
     ],
     'license': 'OPL-1',
     'installable': True,

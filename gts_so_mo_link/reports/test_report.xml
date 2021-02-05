@@ -11,6 +11,12 @@
                             <div class="oe_structure"/>
                             <table class="table" width="100%;"
                                    style="border-top:1px solid;border-bottom:1px solid;border-left:1px solid;border-right:1px solid;">
+                                <t t-set="cell_qty" t-value="0"/>
+                                <t t-foreach="o.finished_move_line_ids" t-as="comp">
+                                    <t t-if="o.product_id.product_type == 'cell'">
+                                        <t t-set="cell_qty" t-value="int(cell_qty) + int(comp.qty_done)"/>
+                                    </t>
+                                </t>
                                 <thead>
                                     <tr>
                                         <td class="border-top-0" colspan="4" style="background: white;">
@@ -216,11 +222,27 @@
                                             <td class="border-top-0">:</td>
                                             <td class="border-top-0" style="background: white;">
                                                 <t t-if="li.lot_id">
-                                                    <span t-esc="int((o.product_id.volts)/2)"/>
+                                                    <!--                                                    <span t-esc="int((o.product_id.volts)/2)"/>-->
+                                                    <t t-if="o.product_id.product_type == 'cell'">
+                                                        <span t-esc="cell_qty"/>
+                                                        <span t-esc="o.product_uom_id.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="int(li.qty_produced)"/>
+                                                        <span t-esc="o.product_uom_id.name"/>
+                                                    </t>
                                                 </t>
                                                 <t t-else="">
-                                                    <span t-esc="int(li.qty_produced)"/>
-                                                    <span t-esc="o.product_uom_id.name"/>
+                                                    <t t-if="o.product_id.product_type == 'cell'">
+                                                        <span t-esc="cell_qty"/>
+                                                        <span t-esc="o.product_uom_id.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="int(li.qty_produced)"/>
+                                                        <span t-esc="o.product_uom_id.name"/>
+                                                    </t>
+                                                    <!--                                                    <span t-esc="int(li.qty_produced)"/>-->
+                                                    <!--                                                    <span t-esc="o.product_uom_id.name"/>-->
                                                 </t>
                                             </td>
                                         </t>
@@ -327,6 +349,12 @@
                         <div class="oe_structure"/>
                         <table class="table" width="100%;"
                                style="border-top:1px solid;border-bottom:1px solid;border-left:1px solid;border-right:1px solid;">
+                            <t t-set="cell_qty" t-value="0"/>
+                            <t t-foreach="o.production_id.finished_move_line_ids" t-as="comp">
+                                <t t-if="o.production_id.product_id.product_type == 'cell'">
+                                    <t t-set="cell_qty" t-value="int(cell_qty) + int(comp.qty_done)"/>
+                                </t>
+                            </t>
                             <thead>
                                 <tr>
                                     <td class="border-top-0" colspan="4" style="background: white;">
@@ -532,11 +560,26 @@
                                         <td class="border-top-0">:</td>
                                         <td class="border-top-0" style="background: white;">
                                             <t t-if="o.lot_id">
-                                                <span t-esc="int((o.production_id.product_id.volts)/2)"/>
+                                                <t t-if="o.production_id.product_id.product_type == 'cell'">
+                                                    <span t-esc="int(cell_qty)"/>
+                                                    <span t-esc="o.production_id.product_uom_id.name"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="int(o.qty_produced)"/>
+                                                    <span t-esc="o.production_id.product_uom_id.name"/>
+                                                </t>
+                                                <!--                                                <span t-esc="int((o.production_id.product_id.volts)/2)"/>-->
                                             </t>
                                             <t t-else="">
-                                                <span t-esc="int(o.qty_produced)"/>
-                                                <span t-esc="o.production_id.product_uom_id.name"/>
+                                                <t t-if="o.production_id.product_id.product_type == 'cell'">
+                                                    <span t-esc="int(cell_qty)"/>
+                                                    <span t-esc="o.production_id.product_uom_id.name"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="int(o.qty_produced)"/>
+                                                    <span t-esc="o.production_id.product_uom_id.name"/>
+                                                </t>
+
                                             </t>
                                         </td>
                                     </t>

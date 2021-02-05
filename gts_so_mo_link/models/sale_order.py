@@ -129,6 +129,38 @@ class SaleOrder(models.Model):
             for data in mrp:
                 data.update({'delivery_date': self.commitment_date})
 
+    def _prepare_invoice(self):
+        """
+        Prepare the dict of values to create the new invoice for a sales order. This method may be
+        overridden to implement custom invoice generation (making sure to call super() to establish
+        a clean extension chain).
+        """
+        self.ensure_one()
+        journal = self.env['account.move'].with_context(force_company=self.company_id.id, default_type='out_invoice')._get_default_journal()
+        if not journal:
+            raise UserError(_('Please define an accounting sales journal for the company %s (%s).') % (self.company_id.name, self.company_id.id))
+
+        invoice_vals = {
+            'ref': self.client_order_ref or '',
+            'type': 'out_invoice',
+            'narration': self.note,
+            'currency_id': self.pricelist_id.currency_id.id,
+            'campaign_id': self.campaign_id.id,
+            'medium_id': self.medium_id.id,
+            'source_id': self.source_id.id,
+            'invoice_user_id': self.user_id and self.user_id.id,
+            'team_id': self.team_id.id,
+            'partner_billing_id': self.partner_invoice_id.id,
+            'partner_id': self.partner_id.id,
+            'partner_shipping_id': self.partner_shipping_id.id,
+            'fiscal_position_id': self.fiscal_position_id.id or self.partner_invoice_id.property_account_position_id.id,
+            'invoice_origin': self.name,
+            'invoice_payment_term_id': self.payment_term_id.id,
+            'invoice_payment_ref': self.reference,
+            'transaction_ids': [(6, 0, self.transaction_ids.ids)],
+            'invoice_line_ids': [],
+        }
+        return invoice_vals
 
 class SaleAdvancePaymentInv(models.TransientModel):
     _inherit = "sale.advance.payment.inv"
@@ -216,7 +248,8 @@ class SaleAdvancePaymentInv(models.TransientModel):
             'invoice_origin': order.name,
             'invoice_user_id': order.user_id.id,
             'narration': order.note,
-            'partner_id': order.partner_invoice_id.id,
+            'partner_id': order.partner_id.id,
+            'partner_billing_id': order.partner_invoice_id.id,
             'fiscal_position_id': order.fiscal_position_id.id or order.partner_id.property_account_position_id.id,
             'partner_shipping_id': order.partner_shipping_id.id,
             'currency_id': order.pricelist_id.currency_id.id,
