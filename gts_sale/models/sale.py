@@ -334,7 +334,8 @@ class SaleOrder(models.Model):
                 self.id, action_id
             )
             sales_url = str(params)
-            email_from = self.env.user.name + ' ,' + 'odoo@eternitytechnologies.com'
+            # email_from = self.env.user.name + ' ,' + 'odoo@eternitytechnologies.com'
+            email_from = self.env.user.email_formatted + ' ,' + 'odoo@eternitytechnologies.com'
             if template_id:
                 values = template_id.generate_email(self.id)
                 values['email_to'] = data.user_id.login or data.create_uid.partner_id.id
