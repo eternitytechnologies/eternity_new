@@ -3,7 +3,7 @@
         <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="production">
                 <div class="page">
-                    <div class="row" style="line-height:18pt;">
+                    <div class="row" style="line-height:14pt;">
 <!--                    <div class="row" >-->
                         <div class="col-15" style="font-size: 18px;">
 <!--                        <div class="col-15" >-->
