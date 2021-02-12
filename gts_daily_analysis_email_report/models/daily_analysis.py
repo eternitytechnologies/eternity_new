@@ -58,7 +58,7 @@ class SaleOrder(models.Model):
                                      ('state', 'not in', ('done', 'cancel'))])
         mrp_done = mrp_obj.search([('state', '=', 'done'), ('date_finished', '>=', today_),
                                    ('date_finished', '<=', today_)])
-        mrp_to_do = mrp_obj.search([('state', 'in', ('draft', 'confirmed', 'planned','progress', 'to_close'))])
+        mrp_to_do = mrp_obj.search([('state', 'in', ('draft', 'confirmed', 'planned','progress', 'to_close')),('untaxed_amount','!=',0.0)])
 
         template = self.env.ref('gts_daily_analysis_email_report.email_template_daily_analysis_report')
         users_list = self.env['res.users'].search([])

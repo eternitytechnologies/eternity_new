@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+        <record id="transfer_attachment_view" model="ir.ui.view">
+            <field name="name">transfer.attachment</field>
+            <field name="model">transfer.attachment</field>
+            <field name="arch" type="xml">
+                <form string="Transfer Attachments">
+                    <group>
+                        <field name="upload_file"/>
+                    </group>
+                    <footer>
+                        <button name="transfer_attachments" string="Transfer" type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+       <record id="action_transfer_attachment" model="ir.actions.act_window">
+            <field name="name">Transfer Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transfer.attachment</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_view_types">list</field>
+        </record>
+
+       <menuitem id="attachment_transfer_menu" name="Attachment Transfer" action="action_transfer_attachment" parent="mrp.menu_mrp_manufacturing"/>
+    </data>
+</odoo>

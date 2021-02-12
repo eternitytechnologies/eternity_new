@@ -33,3 +33,4 @@ class UpdateMO(models.TransientModel):
                 if str(row[10]) == 'CLOSED':
                     mo = self.env['mrp.production'].search([('name', '=', row[1])])
                     mo.state = 'done'
+
