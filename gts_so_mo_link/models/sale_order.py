@@ -59,6 +59,12 @@ class SaleOrder(models.Model):
                                       compute='find_for_invoice_approval', )
     categ_id = fields.Many2many(related='partner_id.category_id',string="Tags")
 
+    def action_cancel(self):
+        for mo in self.production_ids:
+            if mo.state not in ('done','cancel'):
+                raise UserError(_('Please cancel the corresponding manufacturing orders first!'))
+        res = super(SaleOrder, self).action_cancel()
+        return res
 
     @api.depends('name')
     def _compute_production_count(self):
