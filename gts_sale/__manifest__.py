@@ -12,7 +12,7 @@
     'data': [
         'security/ir.model.access.csv',
         'security/security_view.xml',
-        # 'data/mail_data.xml',
+        'data/mail_data.xml',
         'wizard/request_modify_view.xml',
         'wizard/cancel_wizard_view.xml',
         'views/sale_view.xml',
