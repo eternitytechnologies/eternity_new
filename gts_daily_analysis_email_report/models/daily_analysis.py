@@ -859,31 +859,32 @@ class SaleOrder(models.Model):
                 """
                 total_quantity, untaxed_amount = 0, 0
                 for mrp in mrp_to_do:
-                    total_quantity += mrp.product_qty
-                    untaxed_amount += mrp.untaxed_amount
-                    planned_date, delivery_date = '', ''
-                    if mrp.date_planned_start:
-                        planned_date = mrp.date_planned_start.strftime('%d/%m/%Y')
-                    if mrp.delivery_date:
-                        delivery_date = mrp.delivery_date.strftime('%d/%m/%Y')
-                    body_mrp_to_do += """
-                        <tr style="border: 1px solid">
-                            <td style="border: 1px solid">{partner}</td>
-                            <td align="center" style="border: 1px solid">{ref}</td>
-                            <td align="center" style="border: 1px solid">{planned_date}</td>
-                            <td align="center" style="border: 1px solid">{delivery_date}</td>
-                            <td align="center" style="border: 1px solid">{source}</td>
-                            <td align="center" style="border: 1px solid">{product}</td>
-                            <td align="center" style="border: 1px solid">{quantity}</td>
-                            <td align="center" style="border: 1px solid">{responsible}</td>
-                            <td align="right" style="border: 1px solid">{untaxed_amount}</td>
-                            <td align="center" style="border: 1px solid">{status}</td>
-                        </tr>
-                    """.format(partner=mrp.partner_id.name or '', ref=mrp.name or '', planned_date=planned_date,
-                               delivery_date=delivery_date, source=mrp.origin or '', product=mrp.product_id.name or '',
-                               responsible=mrp.user_id.name or '', quantity=int(mrp.product_qty),
-                               status=dict(mrp._fields['state'].selection).get(mrp.state),
-                               untaxed_amount=format_currency(mrp.untaxed_amount, 'INR', locale='en_IN'))
+                    if mrp.untaxed_amount > 0:
+                        total_quantity += mrp.product_qty
+                        untaxed_amount += mrp.untaxed_amount
+                        planned_date, delivery_date = '', ''
+                        if mrp.date_planned_start:
+                            planned_date = mrp.date_planned_start.strftime('%d/%m/%Y')
+                        if mrp.delivery_date:
+                            delivery_date = mrp.delivery_date.strftime('%d/%m/%Y')
+                        body_mrp_to_do += """
+                            <tr style="border: 1px solid">
+                                <td style="border: 1px solid">{partner}</td>
+                                <td align="center" style="border: 1px solid">{ref}</td>
+                                <td align="center" style="border: 1px solid">{planned_date}</td>
+                                <td align="center" style="border: 1px solid">{delivery_date}</td>
+                                <td align="center" style="border: 1px solid">{source}</td>
+                                <td align="center" style="border: 1px solid">{product}</td>
+                                <td align="center" style="border: 1px solid">{quantity}</td>
+                                <td align="center" style="border: 1px solid">{responsible}</td>
+                                <td align="right" style="border: 1px solid">{untaxed_amount}</td>
+                                <td align="center" style="border: 1px solid">{status}</td>
+                            </tr>
+                        """.format(partner=mrp.partner_id.name or '', ref=mrp.name or '', planned_date=planned_date,
+                                   delivery_date=delivery_date, source=mrp.origin or '', product=mrp.product_id.name or '',
+                                   responsible=mrp.user_id.name or '', quantity=int(mrp.product_qty),
+                                   status=dict(mrp._fields['state'].selection).get(mrp.state),
+                                   untaxed_amount=format_currency(mrp.untaxed_amount, 'INR', locale='en_IN'))
                 body_mrp_to_do += """
                     <tr style="border: 1px solid">
                         <td style="border: 1px solid"></td>
