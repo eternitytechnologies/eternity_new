@@ -859,7 +859,7 @@ class SaleOrder(models.Model):
                 """
                 total_quantity, untaxed_amount = 0, 0
                 for mrp in mrp_to_do:
-                    if mrp.untaxed_amount > 0:
+                    if mrp.untaxed_amount > 0.0:
                         total_quantity += mrp.product_qty
                         untaxed_amount += mrp.untaxed_amount
                         planned_date, delivery_date = '', ''

@@ -32,5 +32,7 @@ class UpdateMO(models.TransientModel):
             else:
                 if str(row[10]) == 'CLOSED':
                     mo = self.env['mrp.production'].search([('name', '=', row[1])])
+                    for move in mo.move_raw_ids:
+                        move.state = 'done'
                     mo.state = 'done'
 
