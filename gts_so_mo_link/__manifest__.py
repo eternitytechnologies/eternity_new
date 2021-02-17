@@ -30,7 +30,6 @@
         'reports/report_bom_mrp.xml',
         'wizard/views/update_mo.xml',
         'views/move_view.xml',
-        # 'wizard/views/transfer_attachments.xml'
     ],
     'license': 'OPL-1',
     'installable': True,
