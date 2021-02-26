@@ -112,13 +112,13 @@
         </t>
     </template>
 
-    <report id="action_report_qrcode_mo"
-            model="mrp.production"
-            string="QR Code (Current)"
-            report_type="qweb-pdf"
-            name="gts_so_mo_link.report_mrp_production_qrcode"
-            file="gts_so_mo_link.report_mrp_production_qrcode"
-            paperformat="report_custom_layout.paperformat_custom_qrcode"/>
+<!--    <report id="action_report_qrcode_mo"-->
+<!--            model="mrp.production"-->
+<!--            string="QR Code (Current)"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="gts_so_mo_link.report_mrp_production_qrcode"-->
+<!--            file="gts_so_mo_link.report_mrp_production_qrcode"-->
+<!--            paperformat="report_custom_layout.paperformat_custom_qrcode"/>-->
 
     <!--upcoming-->
     <template id="report_mrp_production_qrcode_upcoming">
