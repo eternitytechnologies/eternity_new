@@ -122,13 +122,13 @@
         </t>
     </template>
 
-    <report id="action_report_qrcode_lot_current"
-            model="stock.production.lot"
-            string="QR Code (Current)"
-            report_type="qweb-pdf"
-            name="gts_so_mo_link.report_lot_qr_code_current"
-            file="gts_so_mo_link.report_lot_qr_code_current"
-            paperformat="report_custom_layout.paperformat_custom_qrcode"/>
+<!--    <report id="action_report_qrcode_lot_current"-->
+<!--            model="stock.production.lot"-->
+<!--            string="QR Code (Current)"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="gts_so_mo_link.report_lot_qr_code_current"-->
+<!--            file="gts_so_mo_link.report_lot_qr_code_current"-->
+<!--            paperformat="report_custom_layout.paperformat_custom_qrcode"/>-->
 
     <!--upcoming-->
     <template id="report_lot_qr_code_upcoming">
